@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickBooks API Testing Tool</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    .header {
+      background-color: #2ca01c;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .test-button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .auth-button {
+      background-color: #2ca01c;
+      color: white;
+    }
+    .auth-button:hover {
+      background-color: #238616;
+    }
+    .reset-button {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .reset-button:hover {
+      background-color: #c0392b;
+    }
+    .info-button {
+      background-color: #3498db;
+      color: white;
+    }
+    .info-button:hover {
+      background-color: #2980b9;
+    }
+    .response-container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    .message {
+      background-color: #E6E6FA;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border-left: 4px solid #2ca01c;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .status-authorized {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .status-unauthorized {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  {% block body %}
+  <div class="header">
+    <h2 style="margin: 0; font-size: 28px;">QuickBooks API Testing Tool</h2>
+  </div>
+  
+  <div class="button-container">
+    {% if session['is_authorized'] == True %}
+      <span class="status-badge status-authorized">✓ Authorized</span>
+      <button class="test-button reset-button" onclick="location.href='{{ url_for('reset_session') }}'">Test: Reset Session</button>
+      <button class="test-button info-button" onclick="location.href='{{ url_for('company_info') }}'">Test: Get Company Info</button>
+    {% else %}
+      <span class="status-badge status-unauthorized">✗ Not Authorized</span>
+      <button class="test-button auth-button" onclick="location.href='{{ url_for('auth') }}'">Test: Authenticate with QuickBooks</button>
+    {% endif %}
+  </div>
+  
+  {% if session['is_authorized'] == True %}
+    {% if company_info %}
+      <div class="response-container">
+        <h3 style="margin-top: 0; color: #2ca01c;">Company Information</h3>
+        <pre style="white-space: pre-wrap; word-break: break-word;">{{ company_info }}</pre>
+      </div>
+    {% endif %}
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="response-container">
+          <h3 style="margin-top: 0; color: #3498db;">Response Messages</h3>
+          {% for category, message in messages %}
+            <div class="message">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  {% else %}
+    <div class="response-container">
+      <h3 style="margin-top: 0;">Welcome</h3>
+      <p>This tool allows you to test the QuickBooks API integration. Start by authenticating with QuickBooks.</p>
+    </div>
+  {% endif %}
+  {% endblock %}
+</body>
+</html>
