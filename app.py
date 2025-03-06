@@ -37,10 +37,6 @@ def company_info():
     """Gets CompanyInfo of the connected QBO account"""
     request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])
     
-    # print(get_historical_transactions(req_context=request_context, keyword='Books'))
-    # print(get_uncategorized_transactions(req_context=request_context))
-    print(categorize_transaction(req_context=request_context, transaction_id=64, category="food"))
-    
     response = get_companyInfo(request_context)
     if (response.status_code == 200):
         return render_template(
