@@ -16,7 +16,7 @@ def get_llm(provider="gemini"):
         Initialized LLM
     """
     if provider == "gemini":
-        return ChatGoogleGenerativeAI(model="gemini-2.0-flash", api_key="AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU")
+        return ChatGoogleGenerativeAI(model="gemini-2.0-flash", api_key="your api key")
     elif provider == "openai":
         return ChatOpenAI(model="gpt-4o-2024-05-13")
     else:  # Reasoning model
