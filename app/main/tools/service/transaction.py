@@ -25,23 +25,35 @@ def get_uncategorized_transactions(req_context, date_range="This Calendar Year")
         # This will depend on the exact QuickBooks API structure
     }
     
-    response = api_call.get_request(req_context, uri, params)
+    response = api_call.get_request(req_context, uri, {})
+    data = response.json()
     
-    # Extract and transform the transactions from the response
-    transactions = []
-    if response and 'Rows' in response and 'Row' in response['Rows']:
-        for row in response['Rows']['Row']:
-            # This structure will need adjustment based on the actual API response
+    historical_data = []
+
+    # Check if the response has the expected structure
+    if data and 'Rows' in data and 'Row' in data['Rows']:
+        for row in data['Rows']['Row']:
+            col_data = row.get('ColData', [])
+            print(col_data)
+            # Only process rows with the expected 9 columns
+            if len(col_data) < 9:
+                continue
+
             transaction = {
-                "id": row.get("Id", ""),
-                "date": row.get("ColData", [])[0].get("value", "") if row.get("ColData") else "",
-                "merchant": row.get("ColData", [])[1].get("value", "") if row.get("ColData") else "",
-                "description": row.get("ColData", [])[2].get("value", "") if row.get("ColData") else "",
-                "amount": row.get("ColData", [])[3].get("value", "") if row.get("ColData") else ""
+                "date": col_data[0].get("value", ""),
+                "transaction_type": col_data[1].get("value", ""),
+                "doc_num": col_data[2].get("value", ""),
+                "posting": col_data[3].get("value", ""),
+                "name": col_data[4].get("value", ""),
+                "description": col_data[5].get("value", ""),
+                "account": col_data[6].get("value", ""),
+                "category": col_data[7].get("value", ""),
+                "amount": col_data[8].get("value", "")
             }
-            transactions.append(transaction)
-    
-    return transactions
+            historical_data.append(transaction)
+
+    return historical_data
+
 
 def categorize_transaction(req_context, transaction_id, category):
     """
@@ -84,17 +96,29 @@ def get_historical_transactions(req_context):
     
     
     response = api_call.get_request(req_context, uri, {})
-    
-    # Parse and return the historical transactions
+    data = response.json()
     historical_data = []
-    if response and 'QueryResponse' in response and 'Transaction' in response['QueryResponse']:
-        for tx in response['QueryResponse']['Transaction']:
+
+    # Check if the response has the expected structure
+    if data and 'Rows' in data and 'Row' in data['Rows']:
+        for row in data['Rows']['Row']:
+            col_data = row.get('ColData', [])
+            print(col_data)
+            # Only process rows with the expected 9 columns
+            if len(col_data) < 9:
+                continue
+
             transaction = {
-                "merchant": tx.get("Description", ""),
-                "amount": tx.get("Amount", ""),
-                "category": tx.get("Category", "")
-                # Add other relevant fields
+                "date": col_data[0].get("value", ""),
+                "transaction_type": col_data[1].get("value", ""),
+                "doc_num": col_data[2].get("value", ""),
+                "posting": col_data[3].get("value", ""),
+                "name": col_data[4].get("value", ""),
+                "description": col_data[5].get("value", ""),
+                "account": col_data[6].get("value", ""),
+                "category": col_data[7].get("value", ""),
+                "amount": col_data[8].get("value", "")
             }
             historical_data.append(transaction)
-    
+
     return historical_data

@@ -17,7 +17,7 @@ def get_request(req_context, uri, params):
     if config.AUTH_TYPE == "OAuth2":
         headers['Authorization'] = "Bearer " + req_context.access_token
         req = requests.get(url, headers=headers, params=params)
-
+     
     else:
         auth = OAuth1(req_context.consumer_key, req_context.consumer_secret, req_context.access_key, req_context.access_secret)
         req = requests.get(url, auth=auth, headers=headers)
