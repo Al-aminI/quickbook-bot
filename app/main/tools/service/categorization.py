@@ -1,5 +1,5 @@
 # categorization.py
-from app.main.tools.utils import APICallService
+from app.main.tools.utils import api_call
 import app.main.config as config
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI

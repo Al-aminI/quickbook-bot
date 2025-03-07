@@ -1,5 +1,5 @@
 from flask import session
-from ..utils import context, APICallService
+from ..utils import api_call, context
 import json
 import app.main.config as config
 
@@ -28,6 +28,6 @@ def create_customer(excel_customer, req_context):
     }
 
     uri = '/customer?minorversion=' + config.API_MINORVERSION
-    response = APICallService.post_request(req_context, uri, customer)
+    response = api_call.post_request(req_context, uri, customer)
     return response
 

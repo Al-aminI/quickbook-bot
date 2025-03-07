@@ -1,5 +1,5 @@
 # transactions.py
-from app.main.tools.utils import APICallService
+from app.main.tools.utils import api_call
 import app.main.config as config
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -25,7 +25,7 @@ def get_uncategorized_transactions(req_context, date_range="This Calendar Year")
         # This will depend on the exact QuickBooks API structure
     }
     
-    response = APICallService.get_request(req_context, uri, params)
+    response = api_call.get_request(req_context, uri, params)
     
     # Extract and transform the transactions from the response
     transactions = []
@@ -64,7 +64,7 @@ def categorize_transaction(req_context, transaction_id, category):
         # Additional fields as required by the API
     }
     
-    response = APICallService.post_request(req_context, uri, payload)
+    response = api_call.post_request(req_context, uri, payload)
     return response
 
 def get_historical_transactions(req_context):
@@ -83,7 +83,7 @@ def get_historical_transactions(req_context):
     uri = f"/reports/TransactionList?date_macro=This Calendar Year&minorversion={config.API_MINORVERSION}"
     
     
-    response = APICallService.get_request(req_context, uri, {})
+    response = api_call.get_request(req_context, uri, {})
     
     # Parse and return the historical transactions
     historical_data = []
