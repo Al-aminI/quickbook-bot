@@ -1,6 +1,6 @@
 # QuickBooks Online Chatbot Tool
 
-A Python Flask application that utilise AI chatbot capabilities (via LangChain) to interact with QuickBooks Online through API calls. This repository provides a collection of tools to perform various QuickBooks operations, all integrated into a conversational interface.
+A Python Flask application that utilizes AI chatbot capabilities (via LangChain) to interact with QuickBooks Online through API calls. This repository provides a collection of tools to perform various QuickBooks operations, all integrated into a conversational interface.
 
 ---
 
@@ -12,6 +12,7 @@ A Python Flask application that utilise AI chatbot capabilities (via LangChain) 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Extending the Toolset](#extending-the-toolset)
+- [Limitations](#limitations)
 - [Contributing](#contributing)
 - [License](#license)
 - [Support](#support)
@@ -110,6 +111,15 @@ These commands are designed to be invoked by an AI language model, streamlining 
 The architecture is designed for extensibility:
 - **Adding New Operations**: To add a new QuickBooks Online operation, simply integrate the corresponding API call into the toolset. This process generally requires adding no more than 15 lines of code.
 - **Modular Design**: Each tool is self-contained, making it easy to maintain and expand without affecting other components of the system.
+
+---
+
+## Limitations
+
+- **No Dedicated Transaction ID Field**: The current data structure does not provide a unique "transaction id" field. Although some fields include an "id" property in their metadata (e.g., for the merchant/name or transaction type), these may not be unique or sufficient as a primary identifier.
+- **Data Extract Constraints**: When processing transactions, the tool extracts all columns from the data row. However, ensure that any integrations or extensions account for the possibility of missing or non-uniform data (e.g., rows with less than the expected number of columns).
+- **Report Data Scope**: The provided example data may be a partial extract from a larger report, and users should verify that all required data fields are populated as expected.
+- **QuickBooks API Variability**: As the QuickBooks API evolves, certain fields or behaviors may change. Regular updates to the toolset may be necessary to maintain full compatibility with new API versions.
 
 ---
 
