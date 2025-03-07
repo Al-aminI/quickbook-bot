@@ -1,9 +1,10 @@
 
-from flask import Flask, request, redirect, url_for, session, g, flash, render_template
+from flask import Flask, jsonify, request, redirect, url_for, session, g, flash, render_template
 # from flask_oauth import OAuth
 import requests
 import urllib
 from werkzeug.exceptions import BadRequest
+from app.main.bot.chat_handler import QBCategorizationChatHandler
 from app.main.tools.service.customer import create_customer
 from app.main.tools.service.company import get_companyInfo
 from app.main.tools.service.transaction import get_historical_transactions, get_uncategorized_transactions, categorize_transaction
@@ -20,6 +21,10 @@ app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
 
+# Initialize chat handler
+chat_handler = QBCategorizationChatHandler()
+
+
 @app.route('/')
 def index():
     """Index route"""
@@ -31,11 +36,25 @@ def index():
     )
 
 
+@app.route('/bot')
+def bot():
+    """bot route"""
+   
+    return render_template(
+        'chat.html',
+       
+    )
+
+
 
 @app.route('/company-info')
 def company_info():
     """Gets CompanyInfo of the connected QBO account"""
     request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])
+    
+    # print(get_historical_transactions(req_context=request_context, keyword='Books'))
+    # print(get_uncategorized_transactions(req_context=request_context))
+    print(categorize_transaction(req_context=request_context, transaction_id=64, category="food"))
     
     response = get_companyInfo(request_context)
     if (response.status_code == 200):
@@ -107,6 +126,38 @@ def csrf_token():
         token = OAuth2Helper.secret_key()
         session['csrfToken'] = token
     return token
+
+
+@app.route('/chat', methods=['POST'])
+def handle_chat():
+    """Handle chat messages from the user"""
+    data = request.json
+    user_message = data.get('message', '')
+    
+    # Get session from request context
+    req_context = get_request_context()
+    
+    # Process message with chat handler
+    response = chat_handler.handle_message(req_context, user_message)
+    
+    return jsonify({
+        'response': response
+    })
+    
+    
+
+def get_request_context():
+    """Get request context with authentication info"""
+    from collections import namedtuple
+    
+    # Create a simple context object with necessary authentication info
+    RequestContext = namedtuple('RequestContext', ['access_token', 'realm_id'])
+    
+    # Get access token and realm ID from session
+    access_token = session.get('access_token')
+    realm_id = session.get('realm_id')
+    
+    return RequestContext(access_token=access_token, realm_id=realm_id)
 
 if __name__ == '__main__':
     app.run()
