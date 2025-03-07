@@ -141,7 +141,7 @@ class QBCategorizationChatHandler:
             
             # Get suggestion for this batch
             sample_tx = batch_txs[0]
-            suggestion = suggest_category(req_context, sample_tx, self.llm_provider)
+            suggestion = suggest_category(req_context, sample_tx, merchant_counts, self.llm_provider)
             
             # Format response with checkboxes for batch
             response = f"I found {len(batch_txs)} transactions from {merchant}.\n\n"
@@ -167,9 +167,9 @@ class QBCategorizationChatHandler:
             tx = self.pending_transactions[0]
             
             # Get suggestion
-            suggestion = suggest_category(req_context, tx, self.llm_provider)
+            suggestion = suggest_category(req_context, tx, merchant_counts, self.llm_provider)
             
-            response = f"Transaction: {tx['merchant']} ${tx['amount']} on {tx['date']}\n"
+            response = f"Transaction: {tx['merchant']} ${tx['amount']}\n"
             response += f"Suggested category: **{suggestion['category']}**\n"
             response += f"Reason: {suggestion['reason']}\n\n"
             response += "Accept this category or suggest a different one?"

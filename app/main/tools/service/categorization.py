@@ -8,24 +8,10 @@ from langchain.chains.llm import LLMChain
 from app.main.tools.service.transaction import get_historical_transactions
 import json
 
-def get_llm(provider="gemini"):
-    """
-    Initialize and return an LLM based on the provider
-    
-    Args:
-        provider: LLM provider ("gemini", "openai", or "reasoning")
-    
-    Returns:
-        Initialized LLM
-    """
-    if provider == "gemini":
-        return ChatGoogleGenerativeAI(model="gemini-2.0-flash")
-    elif provider == "openai":
-        return ChatOpenAI(model="gpt-4o-2024-05-13")
-    else:  # Reasoning model
-        return ChatOpenAI(model="gpt-4o")  # Less expensive than 4.5
+from app.main.tools.utils.llm import get_llm
 
-def suggest_category(req_context, transaction, llm_provider="gemini"):
+
+def suggest_category(req_context, transaction, merchant_counts, llm_provider="gemini"):
     """
     Suggest a category for a transaction using an LLM
     
@@ -39,8 +25,8 @@ def suggest_category(req_context, transaction, llm_provider="gemini"):
     """
     # Get historical data for this merchant
     merchant = transaction.get("merchant", "")
-    historical_data = get_historical_transactions(req_context, merchant)
-    
+    # historical_data = get_historical_transactions(req_context, merchant)
+    historical_data = merchant_counts
     # Initialize LLM
     llm = get_llm(llm_provider)
     
@@ -51,15 +37,15 @@ def suggest_category(req_context, transaction, llm_provider="gemini"):
     TRANSACTION:
     Merchant: {merchant}
     Amount: ${amount}
-    Date: {date}
-    Description: {description}
+    Description: ${description}
+    Date: ${date}
     
     HISTORICAL DATA FOR SIMILAR TRANSACTIONS:
     {historical_data}
     
-    AVAILABLE CATEGORIES:
+    AVAILABLE CATEGORIES :
     Office Supplies, Meals & Entertainment, Travel, Rent, Utilities, Professional Services, 
-    Insurance, Marketing, Maintenance, Equipment, Software, Payroll, Other
+    Insurance, Marketing, Maintenance, Equipment, Software, Payroll, Others in the historical data.
     
     Based on the transaction details and historical data, suggest the most appropriate category.
     Provide a brief explanation for your suggestion.
@@ -71,15 +57,16 @@ def suggest_category(req_context, transaction, llm_provider="gemini"):
     
     prompt = PromptTemplate(
         template=template,
-        input_variables=["merchant", "amount", "date", "description", "historical_data"]
+        input_variables=["merchant", "amount", "historical_data", "description", "date"]
     )
     
     # Format historical data for the prompt
-    hist_str = "None" if not historical_data else "\n".join([
-        f"- {h.get('merchant', 'Unknown')}: ${h.get('amount', 'N/A')} - Categorized as: {h.get('category', 'N/A')}"
-        for h in historical_data[:5]  # Limit to 5 examples
-    ])
-    
+    # hist_str = "None" if not historical_data else "\n".join([
+    #     f"- {h.get('merchant', 'Unknown')}: ${h.get('amount', 'N/A')} - Categorized as: {h.get('category', 'N/A')}"
+    #     for h in historical_data[:5]  # Limit to 5 examples
+    # ])
+    hist_str = str(historical_data)
+   
     # Create and run LLM chain
     chain = LLMChain(llm=llm, prompt=prompt)
     result = chain.run(
@@ -89,7 +76,7 @@ def suggest_category(req_context, transaction, llm_provider="gemini"):
         description=transaction.get("description", ""),
         historical_data=hist_str
     )
-    
+    print(result)
     # Parse the result
     category = "Uncategorized"
     reason = "No suggestion available"
@@ -132,7 +119,7 @@ def batch_suggest_categories(req_context, transactions, llm_provider="gemini"):
         if len(txs) > 1:
             # If multiple transactions from same merchant, suggest batch categorization
             sample_tx = txs[0]
-            suggestion = suggest_category(req_context, sample_tx, llm_provider)
+            suggestion = suggest_category(req_context, sample_tx, merchant_groups, llm_provider)
             results.append({
                 "merchant": merchant,
                 "transactions": txs,
@@ -143,7 +130,7 @@ def batch_suggest_categories(req_context, transactions, llm_provider="gemini"):
             })
         else:
             # Single transaction
-            suggestion = suggest_category(req_context, txs[0], llm_provider)
+            suggestion = suggest_category(req_context, txs[0], merchant_groups, llm_provider)
             results.append({
                 "merchant": merchant,
                 "transactions": txs,
