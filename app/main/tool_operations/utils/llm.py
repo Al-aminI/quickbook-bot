@@ -72,12 +72,8 @@ def get_llm(provider="gemini"):
 
 
 
-def call_llm(prompt):
-    prompt = PromptTemplate(
-        template=prompt,
-    )
-    
+def call_llm(prompt): 
     llm = get_llm()
-    chain = LLMChain(llm=llm, prompt=prompt)
-    result = chain.run()
+    result =llm.invoke(prompt)
+    print(result.content)
     return result

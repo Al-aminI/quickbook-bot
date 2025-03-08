@@ -6,11 +6,10 @@ from app.main.tool_operations.utils import api_call
 from app.main.tool_operations.utils.llm import call_llm
 from app.main.tool_operations.utils.prompt_helper import analyze_workflow_complexity, create_final_prompt, generate_agent1_prompt, generate_agent2_prompt
 from app.main.tool_operations.service.workflow_executor import WorkflowExecutor
-from manage import get_request_context
 
 logger = logging.getLogger(__name__)
 
-def chat_handler(user_query, conversation_history=""):
+def chat_handler(request_context, user_query, conversation_history=""):
     """
     Enhanced chat handler with support for complex workflows.
     
@@ -54,7 +53,7 @@ def chat_handler(user_query, conversation_history=""):
     # Get the tools and workflow description
     tools_to_use = agent2_data.get("tools", [])
     workflow_description = agent2_data.get("workflow", "")
-    request_context = get_request_context()
+    request_context = request_context
     
     # Step 3: Determine workflow complexity and execute accordingly
     # is_complex_workflow = determine_workflow_complexity(workflow_description, tools_to_use)
@@ -77,7 +76,7 @@ def chat_handler(user_query, conversation_history=""):
         tool_execution_responses = execute_simple_workflow(tools_to_use, request_context)
     
     # Step 4: Pass the tool execution responses to the LLM to prepare the final answer.
-    final_prompt = create_final_prompt(tool_execution_responses)
+    final_prompt = create_final_prompt(tool_execution_responses, tools_to_use, user_query)
     final_llm_response = call_llm(final_prompt)
     
     # Step 5: Return the final response to the user.

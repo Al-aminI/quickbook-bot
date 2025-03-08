@@ -158,14 +158,6 @@
         "documentation": {}
     },
     {
-        "label": "get_request_context",
-        "importPath": "manage",
-        "description": "manage",
-        "isExtraImport": true,
-        "detail": "manage",
-        "documentation": {}
-    },
-    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -397,6 +389,14 @@
         "documentation": {}
     },
     {
+        "label": "chat_handler",
+        "importPath": "app.main.bot.chat",
+        "description": "app.main.bot.chat",
+        "isExtraImport": true,
+        "detail": "app.main.bot.chat",
+        "documentation": {}
+    },
+    {
         "label": "OAuth2Helper",
         "importPath": "app.main.tool_operations.auth",
         "description": "app.main.tool_operations.auth",
@@ -490,7 +490,7 @@
         "kind": 2,
         "importPath": "app.main.bot.chat",
         "description": "app.main.bot.chat",
-        "peekOfCode": "def chat_handler(user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:\n       a. For simple sequential workflows, use the original tool execution logic.",
+        "peekOfCode": "def chat_handler(request_context, user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:\n       a. For simple sequential workflows, use the original tool execution logic.",
         "detail": "app.main.bot.chat",
         "documentation": {}
     },
@@ -499,7 +499,7 @@
         "kind": 5,
         "importPath": "app.main.bot.chat",
         "description": "app.main.bot.chat",
-        "peekOfCode": "logger = logging.getLogger(__name__)\ndef chat_handler(user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:",
+        "peekOfCode": "logger = logging.getLogger(__name__)\ndef chat_handler(request_context, user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:",
         "detail": "app.main.bot.chat",
         "documentation": {}
     },
@@ -922,7 +922,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
-        "peekOfCode": "def call_llm(prompt):\n    prompt = PromptTemplate(\n        template=prompt,\n    )\n    llm = get_llm()\n    chain = LLMChain(llm=llm, prompt=prompt)\n    result = chain.run()\n    return result",
+        "peekOfCode": "def call_llm(prompt): \n    llm = get_llm()\n    result =llm.invoke(prompt)\n    print(result.content)\n    return result",
         "detail": "app.main.tool_operations.utils.llm",
         "documentation": {}
     },
@@ -931,7 +931,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_agent1_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = (\n        \"you are given the following conversation history between the user and the agent. \"\n        \"Your task is to classify the user prompt, identify their intent, and generate your response in JSON format as below:\\n\"\n        \"{\\n\"\n        '    \"is_follow_up\": Boolean, \\n'\n        '    \"need_tool_use\": Boolean, \\n'",
+        "peekOfCode": "def generate_agent1_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that.\n        your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n \n        {\\n \n            \"is_follow_up\": Boolean, # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False. \\n\n            \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \\n\n            \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\\n",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -940,7 +940,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_agent2_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    \"\"\"\n    with open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"You are given the following tools. Your task is to identify and return which tools to use to complete the user's request. \"\n        \"Ensure that you include all necessary tools with appropriate parameters and values. Your response must be in JSON format as follows:\\n\"",
+        "peekOfCode": "def generate_agent2_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    \"\"\"\n    with open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly.\" \n        \"your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n\"",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -949,7 +949,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def check_inter_tool_dependency(previous_response, current_tool):\n    \"\"\"\n    Check whether the result of a previous tool execution should be used to update the current tool's parameters or payload.\n    This function sends a prompt to the LLM with the previous tool's response and the current tool's details.\n    The expected response is a JSON object with optional 'updated_payload' and 'updated_params' that override the current tool's values.\n    \"\"\"\n    dependency_prompt = (\n        \"dependency check:\\n\"\n        \"Previous tool response: {prev_resp}\\n\"\n        \"Current tool details: {curr_tool}\\n\"",
+        "peekOfCode": "def check_inter_tool_dependency(previous_response, current_tool):\n    \"\"\"\n    Check whether the result of a previous tool execution should be used to update the current tool's parameters or payload.\n    This function sends a prompt to the LLM with the previous tool's response and the current tool's details.\n    The expected response is a JSON object with optional 'updated_payload' and 'updated_params' that override the current tool's values. no any additional text apart from the json object, do not add any ```json  or ```, return just the json object.\n    \"\"\"\n    dependency_prompt = (\n        \"dependency check:\\n\"\n        \"Previous tool response: {prev_resp}\\n\"\n        \"Current tool details: {curr_tool}\\n\"",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -958,7 +958,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def create_final_prompt(tool_responses):\n    \"\"\"\n    Create a final prompt for the LLM using the responses obtained from the tool executions.\n    \"\"\"\n    prompt = (\n        \"You are given the following responses from tool executions:\\n\"\n        \"{responses}\\n\"\n        \"Based on these, prepare a final, friendly, and professional response to the user.\"\n    ).format(responses=json.dumps(tool_responses))\n    return prompt",
+        "peekOfCode": "def create_final_prompt(tool_responses, tools_used, user_request):\n    \"\"\"\n    Create a final prompt for the LLM using the responses obtained from the tool executions.\n    \"\"\"\n    prompt = (\n        \"You are given the following responses from tool executions made by an agent to process user request,\"\n        \"Based on these, prepare a final, friendly, and professional response to the user:\\n\"\n        \"User request\\n: {user_reques}\\n\"\n        \"Tools used\\n: {tools_used}\\n\"\n        \"Tools execution result\\n: {responses}\\n\"",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -1003,7 +1003,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
+        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1012,7 +1012,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
+        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1021,7 +1021,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
+        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1030,7 +1030,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
+        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1093,7 +1093,7 @@
         "kind": 2,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "def handle_chat():\n    \"\"\"Handle chat messages from the user\"\"\"\n    data = request.json\n    user_message = data.get('message', '')\n    # Get session from request context\n    req_context = get_request_context()\n    # Process message with chat handler\n    response = \"\"\n    return jsonify({\n        'response': response",
+        "peekOfCode": "def handle_chat():\n    \"\"\"Handle chat messages from the user\"\"\"\n    data = request.json\n    user_message = data.get('message', '')\n    # Get session from request context\n    req_context = get_request_context()\n    # Process message with chat handler\n    response = chat_handler(req_context, user_message)\n    return jsonify({\n        'response': response",
         "detail": "manage",
         "documentation": {}
     },

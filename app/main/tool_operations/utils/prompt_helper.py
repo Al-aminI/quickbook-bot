@@ -14,17 +14,16 @@ def generate_agent1_prompt(user_query, conversation_history):
     """
     Generate the prompt for Agent1 based on the user query and conversation history.
     """
-    prompt = (
-        "you are given the following conversation history between the user and the agent. "
-        "Your task is to classify the user prompt, identify their intent, and generate your response in JSON format as below:\n"
-        "{\n"
-        '    "is_follow_up": Boolean, \n'
-        '    "need_tool_use": Boolean, \n'
-        '    "casual_response": "if user request does not require using tool, answer casually; else, null"\n'
-        "}\n"
-        "Here is the user query: {user_query}\n\n"
-        "Here is the conversation history:\n{conversation_history}"
-    ).format(user_query=user_query, conversation_history=conversation_history)
+    prompt = """you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that.
+        your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n 
+        {\n 
+            "is_follow_up": Boolean, # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False. \n
+            "need_tool_use": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \n
+            "casual_response": "if user request does not require using tool, causally anwer him with friendy tone, else this field should be null",\n
+        "}\n
+        Here is the user query:"""
+    prompt = prompt + str(user_query) + "\n\nHere is the conversation history:\n" + str(conversation_history)
+    
     return prompt
 
 
@@ -40,13 +39,13 @@ def generate_agent2_prompt(user_query):
         tools = json.load(file)
     
     prompt = (
-        "You are given the following tools. Your task is to identify and return which tools to use to complete the user's request. "
-        "Ensure that you include all necessary tools with appropriate parameters and values. Your response must be in JSON format as follows:\n"
+        "you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly." 
+        "your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n"
         "{\n"
-        '    "tools": "list of tool objects",\n'
-        '    "workflow": "explanation of how to achieve the user request by using the tools",\n'
-        '    "follow_ups": "ask the user for any additional parameters if needed",\n'
-        '    "need_additional_parameters_from_user": Boolean\n'
+                '"tools": ["list of tools"], # like this "tools": [{"tool_name": "tool name", "operation": "operations", "description": "description of the tool"} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it\'s appropriate values for each tool to call in order to completeb the user request.\n'
+                '"workflow": "the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent",\n'
+                '"follow_ups": "ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.",  # Note: companyId and minorversion  and authentication are handled by the system.\n'
+                '"need_additional_parameters_from_user":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward.\n'
         "}\n"
         "Here is the user query: {user_query}\n\n"
         "Here is the tools set you have access to:\n{tools}"
@@ -59,7 +58,7 @@ def check_inter_tool_dependency(previous_response, current_tool):
     Check whether the result of a previous tool execution should be used to update the current tool's parameters or payload.
     
     This function sends a prompt to the LLM with the previous tool's response and the current tool's details.
-    The expected response is a JSON object with optional 'updated_payload' and 'updated_params' that override the current tool's values.
+    The expected response is a JSON object with optional 'updated_payload' and 'updated_params' that override the current tool's values. no any additional text apart from the json object, do not add any ```json  or ```, return just the json object.
     """
     dependency_prompt = (
         "dependency check:\n"
@@ -79,15 +78,18 @@ def check_inter_tool_dependency(previous_response, current_tool):
     return dependency_data
 
 
-def create_final_prompt(tool_responses):
+def create_final_prompt(tool_responses, tools_used, user_request):
     """
     Create a final prompt for the LLM using the responses obtained from the tool executions.
     """
     prompt = (
-        "You are given the following responses from tool executions:\n"
-        "{responses}\n"
+        "You are given the following responses from tool executions made by an agent to process user request,"
+        "Based on these, prepare a final, friendly, and professional response to the user:\n"
+        "User request\n: {user_reques}\n"
+        "Tools used\n: {tools_used}\n"
+        "Tools execution result\n: {responses}\n"
         "Based on these, prepare a final, friendly, and professional response to the user."
-    ).format(responses=json.dumps(tool_responses))
+    ).format(responses=json.dumps(tool_responses), tools_used=json.dumps(tools_used), user_request=user_request)
     return prompt
 
 
@@ -110,13 +112,13 @@ def analyze_workflow_complexity(tools_to_use, workflow_description):
         f"Tools: {json.dumps(tools_to_use)}\n\n"
         f"Workflow: {workflow_description}\n\n"
         "Respond with a JSON object that includes:\n"
-        "{\n"
+        "{{\n"
         '    "is_complex": Boolean (true if the workflow requires iteration, pagination, or processing large datasets),\n'
         '    "requires_pagination": Boolean (true if the workflow might need to handle paginated results),\n'
         '    "estimated_data_size": String (estimate of data volume: "small", "medium", "large"),\n'
         '    "dependencies": [List of dependencies between tools, e.g., "Tool1.output -> Tool2.input"],\n'
         '    "execution_approach": "String describing the best approach to execute this workflow"\n'
-        "}"
+        "}}"
     )
     res = call_llm(prompt)
     try:

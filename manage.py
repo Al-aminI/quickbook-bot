@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request, redirect, url_for, session, g, flash,
 import requests
 import urllib
 from werkzeug.exceptions import BadRequest
+from app.main.bot.chat import chat_handler
 from app.main.tool_operations.utils import context
 from app.main.tool_operations.auth import OAuth2Helper
 import app.main.config as config
@@ -108,7 +109,7 @@ def handle_chat():
     req_context = get_request_context()
     
     # Process message with chat handler
-    response = ""
+    response = chat_handler(req_context, user_message)
     
     return jsonify({
         'response': response

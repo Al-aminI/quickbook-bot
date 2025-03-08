@@ -98,7 +98,9 @@
     {% if session['is_authorized'] == True %}
       <span class="status-badge status-authorized">✓ Authorized</span>
       <button class="test-button reset-button" onclick="location.href='{{ url_for('reset_session') }}'">Test: Reset Session</button>
-      <button class="test-button info-button" onclick="location.href='{{ url_for('company_info') }}'">Test: Get Company Info</button>
+      <button class="info-button info-button" onclick="location.href='{{ url_for('bot') }}'">chatbot</button>
+      
+     
     {% else %}
       <span class="status-badge status-unauthorized">✗ Not Authorized</span>
       <button class="test-button auth-button" onclick="location.href='{{ url_for('auth') }}'">Test: Authenticate with QuickBooks</button>
