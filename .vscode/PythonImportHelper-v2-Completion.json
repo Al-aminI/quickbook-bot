@@ -877,7 +877,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.api_call",
         "description": "app.main.tool_operations.utils.api_call",
-        "peekOfCode": "def get_request(req_context, uri, params):\n    \"\"\"HTTP GET request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    if config.ENVIRONMENT == \"Sandbox\":\n        base_url = \"https://sandbox-quickbooks.api.intuit.com/v3/company/\"\n    else:\n        base_url = \"https://quickbooks.api.intuit.com/v3/company/\"\n    url = base_url + req_context.realm_id + uri",
+        "peekOfCode": "def get_request(req_context, uri, params):\n    \"\"\"HTTP GET request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    pos = uri.find(\"v3\")\n    if pos == -1:\n        raise ValueError(\"The URL does not contain 'v3'\")\n    substring = url[pos:]\n    url = (substring",
         "detail": "app.main.tool_operations.utils.api_call",
         "documentation": {}
     },
@@ -886,7 +886,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.api_call",
         "description": "app.main.tool_operations.utils.api_call",
-        "peekOfCode": "def post_request(req_context, uri, payload):\n    \"\"\"HTTP POST request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'content-type': \"application/json; charset=utf-8\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    if config.ENVIRONMENT == \"Sandbox\":\n        base_url = \"https://sandbox-quickbooks.api.intuit.com/v3/company/\"\n    else:\n        base_url = \"https://quickbooks.api.intuit.com/v3/company/\"",
+        "peekOfCode": "def post_request(req_context, uri, payload):\n    \"\"\"HTTP POST request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'content-type': \"application/json; charset=utf-8\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    pos = uri.find(\"v3\")\n    if pos == -1:\n        raise ValueError(\"The URL does not contain 'v3'\")\n    substring = url[pos:]",
         "detail": "app.main.tool_operations.utils.api_call",
         "documentation": {}
     },
@@ -1003,7 +1003,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1012,7 +1012,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1021,7 +1021,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1030,7 +1030,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
         "detail": "app.main.config",
         "documentation": {}
     },

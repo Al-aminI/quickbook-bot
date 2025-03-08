@@ -14,4 +14,4 @@ ENVIRONMENT = 'Sandbox'
 # Set to latest at the time of updating this app, can be be configured to any minor version
 API_MINORVERSION = '75'
 
-GOOGLE_AI_API_KEY=""
+GOOGLE_AI_API_KEY="AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU"
