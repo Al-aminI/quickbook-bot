@@ -4,12 +4,8 @@ from flask import Flask, jsonify, request, redirect, url_for, session, g, flash,
 import requests
 import urllib
 from werkzeug.exceptions import BadRequest
-from app.main.bot.chat_handler import QBCategorizationChatHandler
-from app.main.tools.service.customer import create_customer
-from app.main.tools.service.company import get_companyInfo
-from app.main.tools.service.transaction import get_historical_transactions, get_uncategorized_transactions, categorize_transaction
-from app.main.tools.utils import context
-from app.main.tools.auth import OAuth2Helper
+from app.main.tool_operations.utils import context
+from app.main.tool_operations.auth import OAuth2Helper
 import app.main.config as config
 
 # configuration
@@ -20,9 +16,6 @@ DEBUG = True
 app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
-
-# Initialize chat handler
-chat_handler = QBCategorizationChatHandler()
 
 
 @app.route('/')
@@ -41,38 +34,13 @@ def bot():
     """bot route"""
     request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])
     
-    print(get_historical_transactions(req_context=request_context))
+    # print(get_historical_transactions(req_context=request_context))
     return render_template(
         'chat.html',
        
     )
 
 
-
-@app.route('/company-info')
-def company_info():
-    """Gets CompanyInfo of the connected QBO account"""
-    request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])
-    
-    # print(get_historical_transactions(req_context=request_context, keyword='Books'))
-    # print(get_uncategorized_transactions(req_context=request_context))
-    # print(categorize_transaction(req_context=request_context, transaction_id=64, category="food"))
-    
-    response = get_companyInfo(request_context)
-    if (response.status_code == 200):
-        return render_template(
-            'index.html',
-            
-            company_info='Company Name: ' + response.json()['CompanyInfo']['CompanyName'],
-            title='QB Customer Leads',
-        )
-    else:
-        return render_template(
-            'index.html',
-         
-            company_info=response.text,
-            title='QB Customer Leads',
-        )
     
 @app.route('/auth')
 def auth():
@@ -140,7 +108,7 @@ def handle_chat():
     req_context = get_request_context()
     
     # Process message with chat handler
-    response = chat_handler.handle_message(req_context, user_message)
+    response = ""
     
     return jsonify({
         'response': response

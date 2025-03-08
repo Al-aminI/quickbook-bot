@@ -1,0 +1,1154 @@
+[
+    {
+        "label": "runpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "runpy",
+        "description": "runpy",
+        "detail": "runpy",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "execute_simple_workflow",
+        "importPath": "app.main.tool_operations.service.workflow_helpers",
+        "description": "app.main.tool_operations.service.workflow_helpers",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.service.workflow_helpers",
+        "documentation": {}
+    },
+    {
+        "label": "api_call",
+        "importPath": "app.main.tool_operations.utils",
+        "description": "app.main.tool_operations.utils",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "api_call",
+        "importPath": "app.main.tool_operations.utils",
+        "description": "app.main.tool_operations.utils",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "context",
+        "importPath": "app.main.tool_operations.utils",
+        "description": "app.main.tool_operations.utils",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "call_llm",
+        "importPath": "app.main.tool_operations.utils.llm",
+        "description": "app.main.tool_operations.utils.llm",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.llm",
+        "documentation": {}
+    },
+    {
+        "label": "call_llm",
+        "importPath": "app.main.tool_operations.utils.llm",
+        "description": "app.main.tool_operations.utils.llm",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.llm",
+        "documentation": {}
+    },
+    {
+        "label": "analyze_workflow_complexity",
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "create_final_prompt",
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "generate_agent1_prompt",
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "generate_agent2_prompt",
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "check_inter_tool_dependency",
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "WorkflowExecutor",
+        "importPath": "app.main.tool_operations.service.workflow_executor",
+        "description": "app.main.tool_operations.service.workflow_executor",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.service.workflow_executor",
+        "documentation": {}
+    },
+    {
+        "label": "get_request_context",
+        "importPath": "manage",
+        "description": "manage",
+        "isExtraImport": true,
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "app.main.config",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "ast",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "OAuth1",
+        "importPath": "requests_oauthlib",
+        "description": "requests_oauthlib",
+        "isExtraImport": true,
+        "detail": "requests_oauthlib",
+        "documentation": {}
+    },
+    {
+        "label": "ChatGoogleGenerativeAI",
+        "importPath": "langchain_google_genai",
+        "description": "langchain_google_genai",
+        "isExtraImport": true,
+        "detail": "langchain_google_genai",
+        "documentation": {}
+    },
+    {
+        "label": "ChatOpenAI",
+        "importPath": "langchain_openai",
+        "description": "langchain_openai",
+        "isExtraImport": true,
+        "detail": "langchain_openai",
+        "documentation": {}
+    },
+    {
+        "label": "LLMChain",
+        "importPath": "langchain.chains.llm",
+        "description": "langchain.chains.llm",
+        "isExtraImport": true,
+        "detail": "langchain.chains.llm",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "importPath": "app.main",
+        "description": "app.main",
+        "isExtraImport": true,
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "g",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "urllib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "urllib",
+        "description": "urllib",
+        "detail": "urllib",
+        "documentation": {}
+    },
+    {
+        "label": "BadRequest",
+        "importPath": "werkzeug.exceptions",
+        "description": "werkzeug.exceptions",
+        "isExtraImport": true,
+        "detail": "werkzeug.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "OAuth2Helper",
+        "importPath": "app.main.tool_operations.auth",
+        "description": "app.main.tool_operations.auth",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.auth",
+        "documentation": {}
+    },
+    {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"quickbook-tools\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.13/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"quickbook-tools\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.13/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"quickbook-tools\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.13/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"quickbook-tools\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.13/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"quickbook-tools\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.13/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"../lib/python3.13/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "chat_handler",
+        "kind": 2,
+        "importPath": "app.main.bot.chat",
+        "description": "app.main.bot.chat",
+        "peekOfCode": "def chat_handler(user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:\n       a. For simple sequential workflows, use the original tool execution logic.",
+        "detail": "app.main.bot.chat",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "app.main.bot.chat",
+        "description": "app.main.bot.chat",
+        "peekOfCode": "logger = logging.getLogger(__name__)\ndef chat_handler(user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:",
+        "detail": "app.main.bot.chat",
+        "documentation": {}
+    },
+    {
+        "label": "get_bearer_token",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.auth.OAuth2Helper",
+        "description": "app.main.tool_operations.auth.OAuth2Helper",
+        "peekOfCode": "def get_bearer_token(auth_code):\n    \"\"\"Gets bearer token from authorization code\"\"\"\n    token_endpoint = get_discovery_doc()['token_endpoint']\n    auth_header = 'Basic ' + to_base64(config.CLIENT_ID + ':' + config.CLIENT_SECRET)\n    headers = {\n        'Accept': 'application/json', \n        'content-type': 'application/x-www-form-urlencoded',\n        'Authorization': auth_header\n    }\n    payload = {",
+        "detail": "app.main.tool_operations.auth.OAuth2Helper",
+        "documentation": {}
+    },
+    {
+        "label": "get_discovery_doc",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.auth.OAuth2Helper",
+        "description": "app.main.tool_operations.auth.OAuth2Helper",
+        "peekOfCode": "def get_discovery_doc():\n    \"\"\"Gets OAuth2 discover document based on configured environment\"\"\"\n    if config.ENVIRONMENT == \"Sandbox\":\n        req = requests.get(\"https://developer.intuit.com/.well-known/openid_sandbox_configuration/\")\n    else:\n        req = requests.get(\"https://developer.intuit.com/.well-known/openid_configuration/\")\n    if req.status_code >= 400:\n        return ''\n    discovery_doc = req.json()\n    return discovery_doc",
+        "detail": "app.main.tool_operations.auth.OAuth2Helper",
+        "documentation": {}
+    },
+    {
+        "label": "to_base64",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.auth.OAuth2Helper",
+        "description": "app.main.tool_operations.auth.OAuth2Helper",
+        "peekOfCode": "def to_base64(s):\n    \"\"\"String to Base64\"\"\"\n    return base64.b64encode(bytes(s, 'utf-8')).decode()\ndef random_string(length, allowed_chars='abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'):\n    return ''.join(random.choice(allowed_chars) for i in range(length))\ndef secret_key():\n    chars = 'abcdefghijklmnopqrstuvwxyz0123456789'\n    return random_string(40, chars)",
+        "detail": "app.main.tool_operations.auth.OAuth2Helper",
+        "documentation": {}
+    },
+    {
+        "label": "random_string",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.auth.OAuth2Helper",
+        "description": "app.main.tool_operations.auth.OAuth2Helper",
+        "peekOfCode": "def random_string(length, allowed_chars='abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'):\n    return ''.join(random.choice(allowed_chars) for i in range(length))\ndef secret_key():\n    chars = 'abcdefghijklmnopqrstuvwxyz0123456789'\n    return random_string(40, chars)",
+        "detail": "app.main.tool_operations.auth.OAuth2Helper",
+        "documentation": {}
+    },
+    {
+        "label": "secret_key",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.auth.OAuth2Helper",
+        "description": "app.main.tool_operations.auth.OAuth2Helper",
+        "peekOfCode": "def secret_key():\n    chars = 'abcdefghijklmnopqrstuvwxyz0123456789'\n    return random_string(40, chars)",
+        "detail": "app.main.tool_operations.auth.OAuth2Helper",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.service.orch_tool",
+        "description": "app.main.tool_operations.service.orch_tool",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)",
+        "detail": "app.main.tool_operations.service.orch_tool",
+        "documentation": {}
+    },
+    {
+        "label": "WorkflowExecutor",
+        "kind": 6,
+        "importPath": "app.main.tool_operations.service.workflow_executor",
+        "description": "app.main.tool_operations.service.workflow_executor",
+        "peekOfCode": "class WorkflowExecutor:\n    \"\"\"\n    A class to dynamically execute complex workflows involving multiple API calls,\n    handling dependencies between tools and processing large datasets efficiently.\n    \"\"\"\n    def __init__(self, request_context):\n        \"\"\"Initialize the workflow executor with the request context.\"\"\"\n        self.request_context = request_context\n        self.execution_results = {}\n        self.tool_responses = []",
+        "detail": "app.main.tool_operations.service.workflow_executor",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.service.workflow_executor",
+        "description": "app.main.tool_operations.service.workflow_executor",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nclass WorkflowExecutor:\n    \"\"\"\n    A class to dynamically execute complex workflows involving multiple API calls,\n    handling dependencies between tools and processing large datasets efficiently.\n    \"\"\"\n    def __init__(self, request_context):\n        \"\"\"Initialize the workflow executor with the request context.\"\"\"\n        self.request_context = request_context\n        self.execution_results = {}",
+        "detail": "app.main.tool_operations.service.workflow_executor",
+        "documentation": {}
+    },
+    {
+        "label": "determine_workflow_complexity",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.service.workflow_helpers",
+        "description": "app.main.tool_operations.service.workflow_helpers",
+        "peekOfCode": "def determine_workflow_complexity(workflow_description, tools_to_use):\n    \"\"\"\n    Analyze the workflow description to determine if it requires complex processing.\n    Args:\n        workflow_description: String describing the workflow\n        tools_to_use: List of tool objects to be used\n    Returns:\n        Boolean indicating if the workflow is complex\n    \"\"\"\n    # Keywords that suggest a complex workflow",
+        "detail": "app.main.tool_operations.service.workflow_helpers",
+        "documentation": {}
+    },
+    {
+        "label": "execute_simple_workflow",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.service.workflow_helpers",
+        "description": "app.main.tool_operations.service.workflow_helpers",
+        "peekOfCode": "def execute_simple_workflow(tools_to_use, request_context):\n    \"\"\"\n    Execute a simple sequential workflow using the original logic.\n    Args:\n        tools_to_use: List of tool objects to use\n        request_context: Request context for API calls\n    Returns:\n        List of tool execution responses\n    \"\"\"\n    tool_execution_responses = []",
+        "detail": "app.main.tool_operations.service.workflow_helpers",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nhistory = \"\"\"\nUser:\\n Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\\n\nAgent:\\n {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "history",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "peekOfCode": "history = \"\"\"\nUser:\\n Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\\n\nAgent:\\n {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",\n            \"description\": \"Get all Customer objects using generic 'Query' endpoint.\",\n            \"endpoint\": \"https://{{baseurl}}/v3/company/{{companyid}}/query?minorversion={{minorversion}}\",\n            \"method\": \"POST\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "peekOfCode": "prompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\n            }\n            here is the user query: good morning\n            here is the conversation history between the user and the agent:\\n\"\"\" + str(history)\nexpected_response = {",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "peekOfCode": "expected_response = {\n  \"is_follow_up\": False,\n  \"need_tool_use\": False,\n  \"casual_response\": \"Good morning to you too!\"\n}",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nhistory = \"\"\"\nUser:\\n Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\\n\nAgent:\\n {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "history",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "peekOfCode": "history = \"\"\"\nUser:\\n Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\\n\nAgent:\\n {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",\n            \"description\": \"Get all Customer objects using generic 'Query' endpoint.\",\n            \"endpoint\": \"https://{{baseurl}}/v3/company/{{companyid}}/query?minorversion={{minorversion}}\",\n            \"method\": \"POST\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "peekOfCode": "prompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\n            }\n            here is the user query: use current date time\n            here is the conversation history between the user and the agent:\\n\"\"\" + str(history)\nexpected_response = {",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "peekOfCode": "expected_response = {\n  \"is_follow_up\": True,\n  \"need_tool_use\": True,\n  \"casual_response\": None\n}",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nhistory = None\nprompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "history",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "peekOfCode": "history = None\nprompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\n            }\n            here is the user query: hello\n            here is the conversation history between the user and the agent:\\n\"\"\" + str(history)",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "peekOfCode": "prompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\n            }\n            here is the user query: hello\n            here is the conversation history between the user and the agent:\\n\"\"\" + str(history)\nexpected_response = {",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "peekOfCode": "expected_response = {\n  \"is_follow_up\": False,\n  \"need_tool_use\": False,\n  \"casual_response\": \"Hello! How can I help you today?\"\n}",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nhistory = None\nprompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "history",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "peekOfCode": "history = None\nprompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\n            }\n            here is the user query: hello\n            here is the conversation history between the user and the agent:\\n\"\"\" + str(history)",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "peekOfCode": "prompt = \"\"\"you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"is_follow_up\": Boolean # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False\n                \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response\n                \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\n            }\n            here is the user query: hello\n            here is the conversation history between the user and the agent:\\n\"\"\" + str(history)\nexpected_response = {",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "peekOfCode": "expected_response = {\n  \"is_follow_up\": False,\n  \"need_tool_use\": False,\n  \"casual_response\": \"Hello! How can I help you today?\"\n}",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nprompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            here is the user query: Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\n            here is the tools set you have access to, if users query doest not require using a tool, then respond to him concisely and friendly, else make sure to outline the tools to use.\n            Tools:\\n\"\"\" + str(tools)\nexpected_response = \"\"\"To fulfill your request, I need to use the following tools in order to identify clients without Profit & Loss (P&L) or Balance Sheet generation this month:",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "peekOfCode": "prompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            here is the user query: Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\n            here is the tools set you have access to, if users query doest not require using a tool, then respond to him concisely and friendly, else make sure to outline the tools to use.\n            Tools:\\n\"\"\" + str(tools)\nexpected_response = \"\"\"To fulfill your request, I need to use the following tools in order to identify clients without Profit & Loss (P&L) or Balance Sheet generation this month:\n                        Tool: QuickBooks Online API\n                        Operation: Report-ProfitAndLoss\n                        Description: Retrieve Profit and Loss reports for each client.",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "peekOfCode": "expected_response = \"\"\"To fulfill your request, I need to use the following tools in order to identify clients without Profit & Loss (P&L) or Balance Sheet generation this month:\n                        Tool: QuickBooks Online API\n                        Operation: Report-ProfitAndLoss\n                        Description: Retrieve Profit and Loss reports for each client.\n                        Parameters:\n                        minorversion: (Use the appropriate minorversion for your QBO account)\n                        Tool: QuickBooks Online API\n                        Operation: Report-BalanceSheet\n                        Description: Retrieve Balance Sheet reports for each client.\n                        Parameters:",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v1",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nprompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"}]\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ay additional follow up to ask the user before proceeding with the execution, like additional details in the parameter according to the tool that is needed to be specified by the user\",   \n            }",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "peekOfCode": "prompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"}]\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ay additional follow up to ask the user before proceeding with the execution, like additional details in the parameter according to the tool that is needed to be specified by the user\",   \n            }\n            here is the user query: Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\n            here is the tools set you have access to, if users query doest not require using a tool, then respond to him concisely and friendly, else make sure to outline the tools to use.\n            Tools:\\n\"\"\" + str(tools)",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "peekOfCode": "expected_response = {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",\n            \"description\": \"Get all Customer objects using generic 'Query' endpoint.\"\n        },\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Report-ProfitAndLoss\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v2",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nprompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"}]\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ay additional follow up to ask the user before proceeding with the execution, like additional details in the parameter according to the tool that is needed to be specified by the user\",  # Note: things like companyId and minorversion  and authentication are handled by the system.\n            }",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "peekOfCode": "prompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"}]\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ay additional follow up to ask the user before proceeding with the execution, like additional details in the parameter according to the tool that is needed to be specified by the user\",  # Note: things like companyId and minorversion  and authentication are handled by the system.\n            }\n            here is the user query: Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\n            here is the tools set you have access to, if users query doest not require using a tool, then respond to him concisely and friendly, else make sure to outline the tools to use.\n            Tools:\\n\"\"\" + str(tools)",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "peekOfCode": "expected_response = {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",\n            \"description\": \"Get all Customer objects using generic 'Query' endpoint.\"\n        },\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Report-ProfitAndLoss\",",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v3",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nprompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it's appropriate values for each tool to call in order to completeb the user request.\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.\",  # Note: companyId and minorversion  and authentication are handled by the system.\n                  \"need_additional_parameters_from_user\":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "peekOfCode": "prompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it's appropriate values for each tool to call in order to completeb the user request.\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.\",  # Note: companyId and minorversion  and authentication are handled by the system.\n                  \"need_additional_parameters_from_user\":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward\n            }\n            here is the user query: Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\n            here is the tools set you have access to, if users query doest not require using a tool, then respond to him concisely and friendly, else make sure to outline the tools to use.",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "peekOfCode": "expected_response = {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",\n            \"description\": \"Get all Customer objects using generic 'Query' endpoint.\",\n            \"endpoint\": \"https://{{baseurl}}/v3/company/{{companyid}}/query?minorversion={{minorversion}}\",\n            \"method\": \"POST\",\n            \"payload\": \"Select * from Customer\",\n            \"response\": {",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_v4",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "peekOfCode": "tools = None\nwith open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n    tools = json.load(file)\nprompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it's appropriate values for each tool to call in order to completeb the user request.\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.\",  # Note: companyId and minorversion  and authentication are handled by the system.\n                  \"need_additional_parameters_from_user\":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "peekOfCode": "prompt = \"\"\"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. \n            your response must be in the following formart, no any additional text apart from the json object:\n            {\n                \"tools\": [\"list of tools\"], # like this \"tools\": [{\"tool_name\": \"tool name\", \"operation\": \"operations\", \"description\": \"description of the tool\"} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it's appropriate values for each tool to call in order to completeb the user request.\n                \"workflow\": \"the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent\",\n                \"follow_ups\": \"ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.\",  # Note: companyId and minorversion  and authentication are handled by the system.\n                  \"need_additional_parameters_from_user\":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward\n            }\n            here is the user query: Which of my clients did not generate a Profit & Loss (P&L) or Balance Sheet this month?\n            here is the tools set you have access to, if users query doest not require using a tool, then respond to him concisely and friendly, else make sure to outline the tools to use.",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "expected_response",
+        "kind": 5,
+        "importPath": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "description": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "peekOfCode": "expected_response = {\n    \"tools\": [\n        {\n            \"tool_name\": \"QuickBooks Online API\",\n            \"operation\": \"Customer-ReadAll\",\n            \"description\": \"Get all Customer objects using generic 'Query' endpoint.\",\n            \"endpoint\": \"https://{{baseurl}}/v3/company/{{companyid}}/query?minorversion={{minorversion}}\",\n            \"method\": \"POST\",\n            \"payload\": \"Select * from Customer\",\n            \"response\": {",
+        "detail": "app.main.tool_operations.utils.prompt_versioning.agent2.prompt_vlatest",
+        "documentation": {}
+    },
+    {
+        "label": "get_request",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.api_call",
+        "description": "app.main.tool_operations.utils.api_call",
+        "peekOfCode": "def get_request(req_context, uri, params):\n    \"\"\"HTTP GET request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    if config.ENVIRONMENT == \"Sandbox\":\n        base_url = \"https://sandbox-quickbooks.api.intuit.com/v3/company/\"\n    else:\n        base_url = \"https://quickbooks.api.intuit.com/v3/company/\"\n    url = base_url + req_context.realm_id + uri",
+        "detail": "app.main.tool_operations.utils.api_call",
+        "documentation": {}
+    },
+    {
+        "label": "post_request",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.api_call",
+        "description": "app.main.tool_operations.utils.api_call",
+        "peekOfCode": "def post_request(req_context, uri, payload):\n    \"\"\"HTTP POST request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'content-type': \"application/json; charset=utf-8\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    if config.ENVIRONMENT == \"Sandbox\":\n        base_url = \"https://sandbox-quickbooks.api.intuit.com/v3/company/\"\n    else:\n        base_url = \"https://quickbooks.api.intuit.com/v3/company/\"",
+        "detail": "app.main.tool_operations.utils.api_call",
+        "documentation": {}
+    },
+    {
+        "label": "RequestContext",
+        "kind": 6,
+        "importPath": "app.main.tool_operations.utils.context",
+        "description": "app.main.tool_operations.utils.context",
+        "peekOfCode": "class RequestContext(object):\n    \"\"\"The context class sets the realm id with the app's Client tokens every time user authorizes an app for their QB company\"\"\"\n    def __init__(self, realm_id, access_token, refresh_token):\n        self.client_id = config.CLIENT_ID\n        self.client_secret = config.CLIENT_SECRET\n        self.realm_id = realm_id\n        self.access_token = access_token\n        self.refresh_token = refresh_token\n    def __str__(self):\n        return self.realm_id",
+        "detail": "app.main.tool_operations.utils.context",
+        "documentation": {}
+    },
+    {
+        "label": "RequestContextOAuth1",
+        "kind": 6,
+        "importPath": "app.main.tool_operations.utils.context",
+        "description": "app.main.tool_operations.utils.context",
+        "peekOfCode": "class RequestContextOAuth1(object):\n    \"\"\"The context class sets the realm id with the app's Consumer tokens every time user authorizes an app for their QB company\"\"\"\n    def __init__(self, realm_id, access_key, access_secret):\n        self.consumer_key = config.CONSUMER_KEY\n        self.consumer_secret = config.CONSUMER_SECRET\n        self.realm_id = realm_id\n        self.access_key = access_key\n        self.access_secret = access_secret\n    def __str__(self):\n        return self.realm_id",
+        "detail": "app.main.tool_operations.utils.context",
+        "documentation": {}
+    },
+    {
+        "label": "get_llm",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.llm",
+        "description": "app.main.tool_operations.utils.llm",
+        "peekOfCode": "def get_llm(provider=\"gemini\"):\n    \"\"\"\n    Initialize and return an LLM based on the provider\n    Args:\n        provider: LLM provider (\"gemini\", \"openai\", or \"reasoning\")\n    Returns:\n        Initialized LLM\n    \"\"\"\n    if provider == \"gemini\":\n        return ChatGoogleGenerativeAI(model=\"gemini-2.0-flash\", api_key=config.GOOGLE_AI_API_KEY)",
+        "detail": "app.main.tool_operations.utils.llm",
+        "documentation": {}
+    },
+    {
+        "label": "call_llm",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.llm",
+        "description": "app.main.tool_operations.utils.llm",
+        "peekOfCode": "def call_llm(prompt):\n    prompt = PromptTemplate(\n        template=prompt,\n    )\n    llm = get_llm()\n    chain = LLMChain(llm=llm, prompt=prompt)\n    result = chain.run()\n    return result",
+        "detail": "app.main.tool_operations.utils.llm",
+        "documentation": {}
+    },
+    {
+        "label": "generate_agent1_prompt",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "peekOfCode": "def generate_agent1_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = (\n        \"you are given the following conversation history between the user and the agent. \"\n        \"Your task is to classify the user prompt, identify their intent, and generate your response in JSON format as below:\\n\"\n        \"{\\n\"\n        '    \"is_follow_up\": Boolean, \\n'\n        '    \"need_tool_use\": Boolean, \\n'",
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "generate_agent2_prompt",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "peekOfCode": "def generate_agent2_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    \"\"\"\n    with open('app/main/tools/utils/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"You are given the following tools. Your task is to identify and return which tools to use to complete the user's request. \"\n        \"Ensure that you include all necessary tools with appropriate parameters and values. Your response must be in JSON format as follows:\\n\"",
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "check_inter_tool_dependency",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "peekOfCode": "def check_inter_tool_dependency(previous_response, current_tool):\n    \"\"\"\n    Check whether the result of a previous tool execution should be used to update the current tool's parameters or payload.\n    This function sends a prompt to the LLM with the previous tool's response and the current tool's details.\n    The expected response is a JSON object with optional 'updated_payload' and 'updated_params' that override the current tool's values.\n    \"\"\"\n    dependency_prompt = (\n        \"dependency check:\\n\"\n        \"Previous tool response: {prev_resp}\\n\"\n        \"Current tool details: {curr_tool}\\n\"",
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "create_final_prompt",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "peekOfCode": "def create_final_prompt(tool_responses):\n    \"\"\"\n    Create a final prompt for the LLM using the responses obtained from the tool executions.\n    \"\"\"\n    prompt = (\n        \"You are given the following responses from tool executions:\\n\"\n        \"{responses}\\n\"\n        \"Based on these, prepare a final, friendly, and professional response to the user.\"\n    ).format(responses=json.dumps(tool_responses))\n    return prompt",
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "analyze_workflow_complexity",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "peekOfCode": "def analyze_workflow_complexity(tools_to_use, workflow_description):\n    \"\"\"\n    Generate a prompt for the LLM to analyze the complexity of a workflow.\n    Args:\n        tools_to_use: List of tool objects\n        workflow_description: Description of the workflow\n    Returns:\n        Prompt string for the LLM\n    \"\"\"\n    prompt = (",
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "generate_code_execution_prompt",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.prompt_helper",
+        "description": "app.main.tool_operations.utils.prompt_helper",
+        "peekOfCode": "def generate_code_execution_prompt(user_query, tools_to_use, workflow_description, template_type=\"standard\"):\n    \"\"\"\n    Generate a prompt for the LLM to create Python code to execute a workflow.\n    Args:\n        user_query: Original user query\n        tools_to_use: List of tool objects\n        workflow_description: Description of the workflow\n        template_type: Type of code template to generate\n    Returns:\n        Prompt string for the LLM",
+        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "peekOfCode": "DEBUG = False\nSQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= 'ABPk9U6UzX3zcSwOaHuRG0zht9ZsVWvNPNdm1zPW0cn606FiK0'\nCLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "SQLALCHEMY_ECHO",
+        "kind": 5,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "peekOfCode": "SQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= 'ABPk9U6UzX3zcSwOaHuRG0zht9ZsVWvNPNdm1zPW0cn606FiK0'\nCLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "CLIENT_SECRET",
+        "kind": 5,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "REDIRECT_URI",
+        "kind": 5,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "ENVIRONMENT",
+        "kind": 5,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "API_MINORVERSION",
+        "kind": 5,
+        "importPath": "app.main.config",
+        "description": "app.main.config",
+        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "detail": "app.main.config",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')\ndef bot():\n    \"\"\"bot route\"\"\"\n    request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "bot",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def bot():\n    \"\"\"bot route\"\"\"\n    request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])\n    # print(get_historical_transactions(req_context=request_context))\n    return render_template(\n        'chat.html',\n    )\n@app.route('/auth')\ndef auth():\n    \"\"\"Initiates the Authorization flow after getting the right config value\"\"\"",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "auth",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def auth():\n    \"\"\"Initiates the Authorization flow after getting the right config value\"\"\"\n    params = {\n        'scope': 'com.intuit.quickbooks.accounting', \n        'redirect_uri': config.REDIRECT_URI,\n        'response_type': 'code', \n        'client_id': config.CLIENT_ID,\n        'state': csrf_token()\n    }\n    url = OAuth2Helper.get_discovery_doc()['authorization_endpoint'] + '?' + urllib.parse.urlencode(params)",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "reset_session",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def reset_session():\n    \"\"\"Resets session\"\"\"\n    session.pop('qbo_token', None)\n    session['is_authorized'] = False\n    return redirect(request.referrer or url_for('index'))\n@app.route('/callback')\ndef callback():\n    \"\"\"Handles callback only for OAuth2\"\"\"\n    #session['realmid'] = str(request.args.get('realmId'))\n    state = str(request.args.get('state'))",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "callback",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def callback():\n    \"\"\"Handles callback only for OAuth2\"\"\"\n    #session['realmid'] = str(request.args.get('realmId'))\n    state = str(request.args.get('state'))\n    error = str(request.args.get('error'))\n    if error == 'access_denied':\n        return redirect(index)\n    if state is None:\n        return BadRequest()\n    elif state != csrf_token():  # validate against CSRF attacks",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_token",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def csrf_token():\n    token = session.get('csrfToken', None)\n    if token is None:\n        token = OAuth2Helper.secret_key()\n        session['csrfToken'] = token\n    return token\n@app.route('/chat', methods=['POST'])\ndef handle_chat():\n    \"\"\"Handle chat messages from the user\"\"\"\n    data = request.json",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "handle_chat",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def handle_chat():\n    \"\"\"Handle chat messages from the user\"\"\"\n    data = request.json\n    user_message = data.get('message', '')\n    # Get session from request context\n    req_context = get_request_context()\n    # Process message with chat handler\n    response = \"\"\n    return jsonify({\n        'response': response",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "get_request_context",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def get_request_context():\n    \"\"\"Get request context with authentication info\"\"\"\n    from collections import namedtuple\n    # Create a simple context object with necessary authentication info\n    RequestContext = namedtuple('RequestContext', ['access_token', 'realm_id'])\n    # Get access token and realm ID from session\n    access_token = session.get('access_token')\n    realm_id = session.get('realm_id')\n    return RequestContext(access_token=access_token, realm_id=realm_id)\nif __name__ == '__main__':",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "SECRET_KEY = 'dev key'\nDEBUG = True\n# setup flask\napp = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "DEBUG = True\n# setup flask\napp = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "app = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "app.debug",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "app.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "app.secret_key",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "app.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')\ndef bot():",
+        "detail": "manage",
+        "documentation": {}
+    }
+]
