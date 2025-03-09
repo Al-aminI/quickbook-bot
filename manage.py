@@ -110,7 +110,9 @@ def handle_chat():
     
     # Process message with chat handler
     response = chat_handler(req_context, user_message)
-    
+    if not isinstance(response, str):
+        response = response.content
+        
     return jsonify({
         'response': response
     })

@@ -12,7 +12,7 @@ import json
 tools = None
 
 
-with open('app/main/tools/utils/qbo_tools.json', 'r') as file:
+with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:
     tools = json.load(file)
 
 prompt = """you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly. 

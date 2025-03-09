@@ -74,6 +74,11 @@ def get_llm(provider="gemini"):
 
 def call_llm(prompt): 
     llm = get_llm()
-    result =llm.invoke(prompt)
-    print(result.content)
+    result = llm.invoke(prompt)
+    # Clean up the code (remove potential markdown code blocks if present)
+    if "```json" in result.content:
+        result = result.content.split("```json")[1].split("```")[0].strip()
+    elif "```" in result:
+        result = result.content.split("```")[1].split("```")[0].strip()
+    print("data", result)
     return result

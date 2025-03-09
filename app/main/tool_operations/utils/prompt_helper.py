@@ -14,13 +14,13 @@ def generate_agent1_prompt(user_query, conversation_history):
     """
     Generate the prompt for Agent1 based on the user query and conversation history.
     """
-    prompt = """you are giving this conversation history between user and agent, your task is to classify user prompt and identify his intent then generate you response based on that.
+    prompt = """you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, your task is to classify user prompt and identify his intent then generate you response based on that.
         your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n 
-        {\n 
+        {{\n 
             "is_follow_up": Boolean, # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False. \n
             "need_tool_use": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \n
             "casual_response": "if user request does not require using tool, causally anwer him with friendy tone, else this field should be null",\n
-        "}\n
+        "}}\n
         Here is the user query:"""
     prompt = prompt + str(user_query) + "\n\nHere is the conversation history:\n" + str(conversation_history)
     
@@ -35,18 +35,18 @@ def generate_agent2_prompt(user_query):
     Generate the prompt for Agent2 based on the user query.
     Loads the available tools from the qbo_tools.json file.
     """
-    with open('app/main/tools/utils/qbo_tools.json', 'r') as file:
+    with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:
         tools = json.load(file)
     
     prompt = (
         "you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly." 
         "your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n"
-        "{\n"
-                '"tools": ["list of tools"], # like this "tools": [{"tool_name": "tool name", "operation": "operations", "description": "description of the tool"} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it\'s appropriate values for each tool to call in order to completeb the user request.\n'
+        "{{\n"
+                '"tools": ["list of tools"], # like this "tools": [{{"tool_name": "tool name", "operation": "operations", "description": "description of the tool"}} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it\'s appropriate values for each tool to call in order to completeb the user request.\n'
                 '"workflow": "the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent",\n'
                 '"follow_ups": "ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.",  # Note: companyId and minorversion  and authentication are handled by the system.\n'
                 '"need_additional_parameters_from_user":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward.\n'
-        "}\n"
+        "}}\n"
         "Here is the user query: {user_query}\n\n"
         "Here is the tools set you have access to:\n{tools}"
     ).format(user_query=user_query, tools=json.dumps(tools))
@@ -85,7 +85,7 @@ def create_final_prompt(tool_responses, tools_used, user_request):
     prompt = (
         "You are given the following responses from tool executions made by an agent to process user request,"
         "Based on these, prepare a final, friendly, and professional response to the user:\n"
-        "User request\n: {user_reques}\n"
+        "User request\n: {user_request}\n"
         "Tools used\n: {tools_used}\n"
         "Tools execution result\n: {responses}\n"
         "Based on these, prepare a final, friendly, and professional response to the user."

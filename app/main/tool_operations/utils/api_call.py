@@ -15,7 +15,7 @@ def get_request(req_context, uri, params):
     if pos == -1:
         raise ValueError("The URL does not contain 'v3'")
     
-    substring = url[pos:]
+    substring = uri[pos:]
     url = (substring
        .replace("{{companyid}}", req_context.realm_id)
        .replace("{companyid}", req_context.realm_id)
@@ -47,7 +47,7 @@ def post_request(req_context, uri, payload):
     if pos == -1:
         raise ValueError("The URL does not contain 'v3'")
     
-    substring = url[pos:]
+    substring = uri[pos:]
     url = (substring
        .replace("{{companyid}}", req_context.realm_id)
        .replace("{companyid}", req_context.realm_id)
