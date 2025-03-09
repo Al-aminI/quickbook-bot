@@ -1020,7 +1020,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "DEBUG = False\nSQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= 'ABPk9U6UzX3zcSwOaHuRG0zht9ZsVWvNPNdm1zPW0cn606FiK0'\nCLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'",
+        "peekOfCode": "DEBUG = False\nSQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= ''\nCLIENT_SECRET = ''\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1029,7 +1029,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "SQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= 'ABPk9U6UzX3zcSwOaHuRG0zht9ZsVWvNPNdm1zPW0cn606FiK0'\nCLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'",
+        "peekOfCode": "SQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= ''\nCLIENT_SECRET = ''\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1038,7 +1038,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"",
+        "peekOfCode": "CLIENT_SECRET = ''\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1047,7 +1047,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"\nOPEN_AI_API_KEY=\"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\"",
+        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"\nOPEN_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1056,7 +1056,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"\nOPEN_AI_API_KEY=\"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\"",
+        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"\nOPEN_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1065,7 +1065,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"AIzaSyBDV-cXr2SooYhz_lIYWrnnP44nCH5_1lU\"\nOPEN_AI_API_KEY=\"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\"",
+        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"\nOPEN_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
