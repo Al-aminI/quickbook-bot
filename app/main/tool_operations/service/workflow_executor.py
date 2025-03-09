@@ -4,6 +4,7 @@ import json
 import ast
 import asyncio
 import logging
+from dateutil.parser import parse
 from typing import Dict, List, Any, Optional, Union
 from ..utils import api_call
 from ..utils.llm import call_llm
@@ -50,23 +51,26 @@ class WorkflowExecutor:
 
                     Your task is to write Python code that will execute this workflow efficiently. The code should:
                     1. Handle dependencies between API calls (where output from one call becomes input to another)
-                    2. Process large datasets efficiently (e.g., paginating through results or using batching when appropriate)
+                    2. Process large datasets efficiently
                     3. Handle errors and edge cases gracefully
-                    4. Return the final results in a structured format
+                    4. For each data fetched or operation made that user should now, make sure to print the data with it's decscription using print statement
+                    5. Print the Final result with a print statement
+                    6. Return the final results in a structured format
 
                     The generated code should use these utility functions that are already available:
-                    - api_call.get_request(request_context, endpoint, params) - For GET requests
-                    - api_call.post_request(request_context, endpoint, payload) - For POST requests
+                    - api_call.get_request(request_context, endpoint, params) - For GET requests, it returns reponse object, you have to add response.json() to get the data. make sure to add the .json() when ever you call api_call.get_request
+                    - api_call.post_request(request_context, endpoint, payload) - For POST requests, it returns reponse object, you have to add response.json() to get the data. make sure to add the .json() when ever you call api_call.post_request
 
                     Your response should be executable Python code (without markdown code blocks) that defines a function named `execute_workflow` that takes a `request_context` parameter and returns the final results.
 
-                    If the workflow requires processing each item from a large dataset, consider using pagination, batching, or async processing where appropriate to optimize performance.
+                    If the workflow requires processing each item from a large dataset, consider using async processing where appropriate to optimize performance.
 
                     Additional requirements:
                     - Validate inputs and handle potential errors
                     - Add appropriate logging
                     - Include detailed comments explaining the workflow logic
                     - For any complex iteration or data processing, ensure it's memory efficient
+                    - Make sure to print the Final result with a print statement
 
                     Return ONLY the Python code, without any explanation before or after.
                     """
@@ -192,7 +196,8 @@ class WorkflowExecutor:
         
         # Call the LLM to generate Python code
         generated_code = call_llm(prompt)
-        
+        if not isinstance(generated_code, str):
+            generated_code = generated_code.content
         # Clean up the code (remove potential markdown code blocks if present)
         if "```python" in generated_code:
             generated_code = generated_code.split("```python")[1].split("```")[0].strip()
@@ -210,5 +215,5 @@ class WorkflowExecutor:
         # Store the tool responses for later use
         if isinstance(results, dict) and "tool_responses" in results:
             self.tool_responses = results["tool_responses"]
-        
+        print("---------------------------------- execution result----------------------------\n", results)
         return results

@@ -212,6 +212,14 @@
         "documentation": {}
     },
     {
+        "label": "parse",
+        "importPath": "dateutil.parser",
+        "description": "dateutil.parser",
+        "isExtraImport": true,
+        "detail": "dateutil.parser",
+        "documentation": {}
+    },
+    {
         "label": "Dict",
         "importPath": "typing",
         "description": "typing",
@@ -297,6 +305,15 @@
         "description": "app.main",
         "isExtraImport": true,
         "detail": "app.main",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -886,7 +903,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.api_call",
         "description": "app.main.tool_operations.utils.api_call",
-        "peekOfCode": "def post_request(req_context, uri, payload):\n    \"\"\"HTTP POST request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'content-type': \"application/json; charset=utf-8\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    pos = uri.find(\"v3\")\n    if pos == -1:\n        raise ValueError(\"The URL does not contain 'v3'\")\n    substring = uri[pos:]",
+        "peekOfCode": "def post_request(req_context, uri, payload):\n    \"\"\"HTTP POST request for QBO API\"\"\"\n    headers = { 'Accept': \"application/json\", \n        'content-type': \"application/text\", \n        'User-Agent': \"PythonSampleApp1\"\n    }\n    pos = uri.find(\"v3\")\n    if pos == -1:\n        raise ValueError(\"The URL does not contain 'v3'\")\n    substring = uri[pos:]",
         "detail": "app.main.tool_operations.utils.api_call",
         "documentation": {}
     },
@@ -913,7 +930,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
-        "peekOfCode": "def get_llm(provider=\"gemini\"):\n    \"\"\"\n    Initialize and return an LLM based on the provider\n    Args:\n        provider: LLM provider (\"gemini\", \"openai\", or \"reasoning\")\n    Returns:\n        Initialized LLM\n    \"\"\"\n    if provider == \"gemini\":\n        return ChatGoogleGenerativeAI(model=\"gemini-2.0-flash\", api_key=config.GOOGLE_AI_API_KEY)",
+        "peekOfCode": "def get_llm(provider=\"openai\"):\n    \"\"\"\n    Initialize and return an LLM based on the provider\n    Args:\n        provider: LLM provider (\"gemini\", \"openai\", or \"reasoning\")\n    Returns:\n        Initialized LLM\n    \"\"\"\n    if provider == \"gemini\":\n        return ChatGoogleGenerativeAI(model=\"gemini-2.0-flash\", api_key=config.GOOGLE_AI_API_KEY)",
         "detail": "app.main.tool_operations.utils.llm",
         "documentation": {}
     },
@@ -922,7 +939,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
-        "peekOfCode": "def call_llm(prompt): \n    llm = get_llm()\n    result = llm.invoke(prompt)\n    # Clean up the code (remove potential markdown code blocks if present)\n    if \"```json\" in result.content:\n        result = result.content.split(\"```json\")[1].split(\"```\")[0].strip()\n    elif \"```\" in result:\n        result = result.content.split(\"```\")[1].split(\"```\")[0].strip()\n    print(\"data\", result)\n    return result",
+        "peekOfCode": "def call_llm(prompt): \n    llm = get_llm()\n    result = llm.invoke(prompt)\n    # Clean up the code (remove potential markdown code blocks if present)\n    if \"```json\" in result.content:\n        result = result.content.split(\"```json\")[1].split(\"```\")[0].strip()\n    elif \"```markdown\" in result.content:\n        result = result.content.split(\"```json\")[1].split(\"```\")[0].strip()\n    elif \"```\" in result:\n        result = result.content.split(\"```\")[1].split(\"```\")[0].strip()",
         "detail": "app.main.tool_operations.utils.llm",
         "documentation": {}
     },
@@ -931,7 +948,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_agent1_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = \"\"\"you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, your task is to classify user prompt and identify his intent then generate you response based on that.\n        your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n \n        {{\\n \n            \"is_follow_up\": Boolean, # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False. \\n\n            \"need_tool_use\": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \\n\n            \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\\n",
+        "peekOfCode": "def generate_agent1_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = f\"\"\"The current date is {datetime.datetime.now()}.\\n you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, the tools description determines it's capabilities, your task is to classify user prompt and identify his intent then generate your response based on that, your only task is to check if the user wants to perform operation with the quickbooks online return need_tool_use as True, or if it is a follow up to previous conversations with quickbooks online tools agent then return is_follow_up as True, else if it not about these two, then return a casual response.\n        your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n \n        {{\\n \n            \"is_follow_up\":boolean, #true if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else false. \\n\n            \"need_tool_use\": boolean, # true if user query requires using a tool else false. this must be tru is user asked any question that is based on quickbooks online for the subsequesnt agent to  perform the operation. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \\n\n            \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\\n",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -940,7 +957,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_agent2_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    \"\"\"\n    with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly.\" \n        \"your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n\"",
+        "peekOfCode": "def generate_agent2_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    Uses intelligent defaults and minimizes follow-up questions.\n    \"\"\"\n    with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"You are a helpful assistant that can call the provided tools.\"",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -958,7 +975,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def create_final_prompt(tool_responses, tools_used, user_request):\n    \"\"\"\n    Create a final prompt for the LLM using the responses obtained from the tool executions.\n    \"\"\"\n    prompt = (\n        \"You are given the following responses from tool executions made by an agent to process user request,\"\n        \"Based on these, prepare a final, friendly, and professional response to the user:\\n\"\n        \"User request\\n: {user_request}\\n\"\n        \"Tools used\\n: {tools_used}\\n\"\n        \"Tools execution result\\n: {responses}\\n\"",
+        "peekOfCode": "def create_final_prompt(tool_responses, tools_used, user_request):\n    \"\"\"\n    Create a final prompt for the LLM using the responses obtained from the tool executions.\n    \"\"\"\n    prompt = (\n        \"You are a helpful assistant that can use the quickbooks online apis as tools.\\n.\"\n        \"The tools description determines your capabilities.\\n You output should be properly formatted markdown. with proper headings and subheadings, and your response is only text, not json or any structure output.\"\n        f\"The current date is {datetime.datetime.now()}.\\n You are given the following responses from tool executions made by an agent to process user request,\"\n        \"Based on these, prepare a final, detailed, and professional response to the user:\\n\"\n        \"User request\\n: {user_request}\\n\"",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -985,7 +1002,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "DEBUG = False\nSQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= 'ABPk9U6UzX3zcSwOaHuRG0zht9ZsVWvNPNdm1zPW0cn606FiK0'\nCLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'",
+        "peekOfCode": "DEBUG = False\nSQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= ''\nCLIENT_SECRET = ''\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -994,7 +1011,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "SQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= 'ABPk9U6UzX3zcSwOaHuRG0zht9ZsVWvNPNdm1zPW0cn606FiK0'\nCLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'",
+        "peekOfCode": "SQLALCHEMY_ECHO = False\n# OAuth2 credentials\nCLIENT_ID= ''\nCLIENT_SECRET = ''\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1003,7 +1020,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "CLIENT_SECRET = 'CQqpDSpogel4ID0DApg7Svx5olzdnxtcedklb6F0'\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "CLIENT_SECRET = ''\n# REDIRECT_URI = 'https://vksplgr2-5000.uks1.devtunnels.ms/callback'\nREDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1012,7 +1029,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "REDIRECT_URI = 'http://localhost:5000/callback'\nAUTH_TYPE='OAuth2'\n# Choose environment; default is sandbox\nENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"\nOPEN_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1021,7 +1038,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "ENVIRONMENT = 'Sandbox'\n# ENVIRONMENT = 'Production'\n# Set to latest at the time of updating this app, can be be configured to any minor version\nAPI_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"\nOPEN_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
@@ -1030,7 +1047,7 @@
         "kind": 5,
         "importPath": "app.main.config",
         "description": "app.main.config",
-        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"",
+        "peekOfCode": "API_MINORVERSION = '75'\nGOOGLE_AI_API_KEY=\"\"\nOPEN_AI_API_KEY=\"\"",
         "detail": "app.main.config",
         "documentation": {}
     },
