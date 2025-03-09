@@ -29,8 +29,8 @@ def chat_handler(request_context, user_query, conversation_history=""):
     agent1_response = call_llm(agent1_prompt)
     try:
         agent1_data = json.loads(agent1_response)
-    except json.JSONDecodeError:
-        logger.error(f"Error parsing Agent1 response: {agent1_response}")
+    except json.JSONDecodeError as e:
+        logger.error(f"Error parsing Agent1 response: {agent1_response}, {e}")
         return "Error processing the response from Agent1."
     
     # If no tool use is required, simply return the casual response.
@@ -59,21 +59,21 @@ def chat_handler(request_context, user_query, conversation_history=""):
     # is_complex_workflow = determine_workflow_complexity(workflow_description, tools_to_use)
     is_complex_workflow = analyze_workflow_complexity(workflow_description, tools_to_use)
     
-    if is_complex_workflow['is_complex']:
-        # Use the dynamic workflow executor for complex workflows
-        executor = WorkflowExecutor(request_context)
-        execution_results = executor.execute_workflow(tools_to_use, workflow_description + is_complex_workflow['dependencies'] + is_complex_workflow["execution_approach"], user_query)
+    # if is_complex_workflow['is_complex']:
+    #     # Use the dynamic workflow executor for complex workflows
+    #     executor = WorkflowExecutor(request_context)
+    #     execution_results = executor.execute_workflow(tools_to_use, str(workflow_description) + str(is_complex_workflow['dependencies']) + str(is_complex_workflow["execution_approach"]), user_query)
         
-        # Handle potential errors in the execution
-        if isinstance(execution_results, dict) and "error" in execution_results:
-            logger.error(f"Error in workflow execution: {execution_results['error']}")
-            return f"There was an error processing your request: {execution_results['error']}"
+    #     # Handle potential errors in the execution
+    #     if isinstance(execution_results, dict) and "error" in execution_results:
+    #         logger.error(f"Error in workflow execution: {execution_results['error']}")
+    #         return f"There was an error processing your request: {execution_results['error']}"
         
-        # Use the tool responses collected by the executor
-        tool_execution_responses = executor.tool_responses
-    else:
+    #     # Use the tool responses collected by the executor
+    #     tool_execution_responses = executor.tool_responses
+    # else:
         # Use the original sequential tool execution for simple workflows
-        tool_execution_responses = execute_simple_workflow(tools_to_use, request_context)
+    tool_execution_responses = execute_simple_workflow(tools_to_use, request_context)
     
     # Step 4: Pass the tool execution responses to the LLM to prepare the final answer.
     final_prompt = create_final_prompt(tool_execution_responses, tools_to_use, user_query)

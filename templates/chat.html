@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chat Bot</title>
+  <title>Chat Bot with Markdown</title>
+  <!-- Add Markdown parser library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -40,6 +42,38 @@
       background-color: #F1F0F0;
       float: left;
       text-align: left;
+    }
+    /* Add styles for markdown content */
+    .bot pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .bot code {
+      background-color: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .bot blockquote {
+      border-left: 3px solid #ccc;
+      padding-left: 10px;
+      margin-left: 5px;
+      color: #555;
+    }
+    .bot table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .bot th, .bot td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .bot th {
+      background-color: #f2f2f2;
     }
     .input-container {
       display: flex;
@@ -79,12 +113,27 @@
   </div>
 
   <script>
+    // Configure marked options
+    marked.setOptions({
+      breaks: true,        // Enable line breaks
+      gfm: true,           // Enable GitHub flavored markdown
+      headerIds: false     // Disable header IDs to prevent potential XSS
+    });
+
     // Function to add a message to the chat log
     function addMessage(sender, text) {
       const chatLog = document.getElementById("chat-log");
       const messageElem = document.createElement("div");
       messageElem.classList.add("message", sender);
-      messageElem.textContent = text;
+      
+      // If it's a bot message, parse the markdown
+      if (sender === "bot") {
+        messageElem.innerHTML = marked.parse(text);
+      } else {
+        // User messages stay as plain text
+        messageElem.textContent = text;
+      }
+      
       chatLog.appendChild(messageElem);
       // Automatically scroll to the bottom of the chat log
       chatLog.scrollTop = chatLog.scrollHeight;
@@ -111,7 +160,7 @@
       })
       .then(response => response.json())
       .then(data => {
-        // Append the bot's response to the chat log
+        // Append the bot's response to the chat log with markdown parsing
         addMessage("bot", data.response);
       })
       .catch(error => {
@@ -127,6 +176,13 @@
         sendMessage();
       }
     });
+
+    // Add a welcome message with markdown example
+    window.onload = function() {
+      const welcomeMessage = `How can I help you today?`;
+      
+      addMessage("bot", welcomeMessage);
+    };
   </script>
 </body>
 </html>

@@ -30,7 +30,7 @@ def get_request(req_context, uri, params):
     if config.AUTH_TYPE == "OAuth2":
         headers['Authorization'] = "Bearer " + req_context.access_token
         req = requests.get(url, headers=headers, params=params)
-     
+        print(req.text)
     else:
         auth = OAuth1(req_context.consumer_key, req_context.consumer_secret, req_context.access_key, req_context.access_secret)
         req = requests.get(url, auth=auth, headers=headers)
@@ -39,7 +39,7 @@ def get_request(req_context, uri, params):
 def post_request(req_context, uri, payload):
     """HTTP POST request for QBO API"""
     headers = { 'Accept': "application/json", 
-        'content-type': "application/json; charset=utf-8", 
+        'content-type': "application/text", 
         'User-Agent': "PythonSampleApp1"
     }
     
@@ -61,7 +61,17 @@ def post_request(req_context, uri, payload):
     
     if config.AUTH_TYPE == "OAuth2":
         headers['Authorization'] = "Bearer " + req_context.access_token
-        req = requests.post(url, headers=headers, data=json.dumps(payload))
+        print(headers, "\n")
+        print(payload, "\n", type(payload))
+        print(url, "\n")
+        try:
+            query = payload['Query']
+        except KeyError:
+            try:
+                query = payload['value']
+            except KeyError:
+                query = payload['query']
+        req = requests.post(url, headers=headers, data=query)
         print(req.text)
     else:
         auth = OAuth1(req_context.consumer_key, req_context.consumer_secret, req_context.access_key, req_context.access_secret)

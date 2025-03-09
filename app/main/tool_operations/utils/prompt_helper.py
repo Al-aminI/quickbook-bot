@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from app.main.tool_operations.utils.llm import call_llm
@@ -14,11 +15,11 @@ def generate_agent1_prompt(user_query, conversation_history):
     """
     Generate the prompt for Agent1 based on the user query and conversation history.
     """
-    prompt = """you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, your task is to classify user prompt and identify his intent then generate you response based on that.
+    prompt = f"""The current date is {datetime.datetime.now()}.\n you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, the tools description determines it's capabilities, your task is to classify user prompt and identify his intent then generate your response based on that, your only task is to check if the user wants to perform operation with the quickbooks online return need_tool_use as True, or if it is a follow up to previous conversations with quickbooks online tools agent then return is_follow_up as True, else if it not about these two, then return a casual response.
         your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n 
         {{\n 
-            "is_follow_up": Boolean, # True if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else False. \n
-            "need_tool_use": Boolean, # True if user query requires using a tool else False. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \n
+            "is_follow_up":boolean, #true if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else false. \n
+            "need_tool_use": boolean, # true if user query requires using a tool else false. this must be tru is user asked any question that is based on quickbooks online for the subsequesnt agent to  perform the operation. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \n
             "casual_response": "if user request does not require using tool, causally anwer him with friendy tone, else this field should be null",\n
         "}}\n
         Here is the user query:"""
@@ -30,22 +31,58 @@ def generate_agent1_prompt(user_query, conversation_history):
 
 
 
+# def generate_agent2_prompt(user_query):
+#     """
+#     Generate the prompt for Agent2 based on the user query.
+#     Loads the available tools from the qbo_tools.json file.
+#     """
+#     with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:
+#         tools = json.load(file)
+    
+#     prompt = (
+#         "you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly." 
+#         "your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n"
+#         "{{\n"
+#                 '"tools": ["list of tools"], # like this "tools": [{{"tool_name": "tool name", "operation": "operations", "description": "description of the tool"}} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it\'s appropriate values for each tool to call in order to completeb the user request.\n'
+#                 '"workflow": "the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent",\n'
+#                 '"follow_ups": "ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the payload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.",  # Note: companyId and minorversion  and authentication are handled by the system.\n'
+#                 '"need_additional_parameters_from_user":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward.\n'
+#         "}}\n"
+#         "Here is the user query: {user_query}\n\n"
+#         "Here is the tools set you have access to:\n{tools}"
+#     ).format(user_query=user_query, tools=json.dumps(tools))
+#     return prompt
+
 def generate_agent2_prompt(user_query):
     """
     Generate the prompt for Agent2 based on the user query.
     Loads the available tools from the qbo_tools.json file.
+    Uses intelligent defaults and minimizes follow-up questions.
     """
     with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:
         tools = json.load(file)
     
     prompt = (
-        "you are giving the following tools, your task is to identify and return which tools to use in other to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly." 
-        "your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n"
+        "You are a helpful assistant that can call the provided tools."
+
+        "The tools description determines your capabilities."
+        f"The current date is {datetime.datetime.now()}.\n You are giving the following tools, your task is to identify and return which tools to use in order to complete user request, make sure to return all the tools necessary to execute in order to complete user request with appropriate parameters and values and making sure that it will execute correctly." 
+        "\n\nIMPORTANT GUIDELINES FOR USER EXPERIENCE:\n"
+        "1. Prioritize using defaults and inferences over asking follow-up questions which will irritate users.\n"
+        "2. For date ranges: When user specifies 'this year', 'last year', 'all', etc., use intelligent defaults:\n"
+        "   - 'this year' = January 1 of current year to current date\n"
+        "   - 'last year' = January 1 to December 31 of previous year\n"
+        "   - 'all' or 'all data' = earliest possible date to current date\n"
+        "   - '2023 or so' = January 1, 2023 to December 31, 2023 or so\n"
+        "   - 'Q1 2023 or so' = January 1, 2023 to March 31, 2023 or so\n"
+        "3. Only set need_additional_parameters_from_user to True for truly essential missing information where defaults cannot reasonably be inferred.\n"
+        "4. Put yourself in the user's shoes - what would they reasonably expect without being asked?\n"
+        "\nYour response must be in the following format, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\n"
         "{{\n"
-                '"tools": ["list of tools"], # like this "tools": [{{"tool_name": "tool name", "operation": "operations", "description": "description of the tool"}} ...] make sure to add the method, payload and extrat the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it\'s appropriate values for each tool to call in order to completeb the user request.\n'
-                '"workflow": "the workflow in explanation of how to achieve the user request by using the tools for subsequesnt agent",\n'
-                '"follow_ups": "ask the user whether any additional follow-up parameters are needed to complete the tool execution. This should include a prompt to specify any extra details or settings that might be required by the tool like some parameters required in the paylload that might required from the user, ensuring that all necessary parameters are clearly defined before moving forward.",  # Note: companyId and minorversion  and authentication are handled by the system.\n'
-                '"need_additional_parameters_from_user":Boolean #True if there is need for user to provide additional parameters to complete the tool request payload else false in the follow_up. ensuring that all necessary parameters are clearly defined before moving forward.\n'
+                '"tools": ["list of tools"], # like this "tools": [{{"tool_name": "tool name", "operation": "operations", "description": "description of the tool", "endpoint" : "endpoint", "payload": "if available, all payload must have a field \'query\' for the query to execute, or it must have a key that have the exact api expected field with all the values" }} ...] make sure to add the method, payload and extract the exact parameters, from the query, if there are needed parameters from the user then write it in the follow_up, ensure to return the complete tool for each and it\'s appropriate values for each tool to call in order to complete the user request.\n'
+                '"workflow": "the workflow in explanation of how to achieve the user request by using the tools for subsequent agent",\n'
+                '"follow_ups": "ask the user ONLY FOR TRULY ESSENTIAL parameters that cannot be reasonably inferred. Do not ask for date ranges when the user has provided general time periods - use defaults instead.", # Note: companyId and minorversion and authentication are handled by the system.\n'
+                '"need_additional_parameters_from_user": Boolean # Set to true ONLY if absolutely necessary information is missing and cannot be reasonably inferred. Default to false to minimize follow-up questions.\n'
         "}}\n"
         "Here is the user query: {user_query}\n\n"
         "Here is the tools set you have access to:\n{tools}"
@@ -83,12 +120,14 @@ def create_final_prompt(tool_responses, tools_used, user_request):
     Create a final prompt for the LLM using the responses obtained from the tool executions.
     """
     prompt = (
-        "You are given the following responses from tool executions made by an agent to process user request,"
-        "Based on these, prepare a final, friendly, and professional response to the user:\n"
+        "You are a helpful assistant that can use the quickbooks online apis as tools.\n."
+        "The tools description determines your capabilities.\n You output should be properly formatted markdown. with proper headings and subheadings, and your response is only text, not json or any structure output."
+        f"The current date is {datetime.datetime.now()}.\n You are given the following responses from tool executions made by an agent to process user request,"
+        "Based on these, prepare a final, detailed, and professional response to the user:\n"
         "User request\n: {user_request}\n"
         "Tools used\n: {tools_used}\n"
         "Tools execution result\n: {responses}\n"
-        "Based on these, prepare a final, friendly, and professional response to the user."
+        "Based on the above provided data, prepare a final, detailed, and professional response to the user."
     ).format(responses=json.dumps(tool_responses), tools_used=json.dumps(tools_used), user_request=user_request)
     return prompt
 
@@ -113,8 +152,7 @@ def analyze_workflow_complexity(tools_to_use, workflow_description):
         f"Workflow: {workflow_description}\n\n"
         "Respond with a JSON object that includes:\n"
         "{{\n"
-        '    "is_complex": Boolean (true if the workflow requires iteration, pagination, or processing large datasets),\n'
-        '    "requires_pagination": Boolean (true if the workflow might need to handle paginated results),\n'
+        '    "is_complex": Boolean (true if the workflow requires iteration),\n'
         '    "estimated_data_size": String (estimate of data volume: "small", "medium", "large"),\n'
         '    "dependencies": [List of dependencies between tools, e.g., "Tool1.output -> Tool2.input"],\n'
         '    "execution_approach": "String describing the best approach to execute this workflow"\n'
