@@ -4,90 +4,90 @@ import logging
 from app.main.tool_operations.service.workflow_helpers import execute_simple_workflow
 # from app.main.tool_operations.utils import api_call
 from app.main.tool_operations.utils.llm import call_llm
-from app.main.tool_operations.utils.memory.memory import get_or_create_memory, update_memory
-from app.main.tool_operations.utils.prompt_helper import create_final_prompt, generate_agent1_prompt, generate_agent2_prompt
-from app.main.tool_operations.service.workflow_executor import WorkflowExecutor
+from app.main.tool_operations.utils.memory.memory import get_or_create_memory, update_memory, reset_memory
+from app.main.tool_operations.utils.prompt_helper import create_final_prompt, memory_management_prompt, tool_use_prompt
+# from app.main.tool_operations.service.workflow_executor import WorkflowExecutor
 
 logger = logging.getLogger(__name__)
 
+
 def chat_handler(request_context, user_query, conversation_history=""):
     """
-    Enhanced chat handler with support for complex workflows.
+    Enhanced chat handler with support for complex workflows and streaming responses.
     
-    Flow:
-    1. Get the user query and use Agent1 to classify intent.
-    2. If the query does not require a tool, return a casual response.
-    3. If a tool is needed, use Agent2 to determine the tools and workflow.
-    4. If additional parameters are required, return a follow-up prompt.
-    5. Analyze the workflow complexity:
-       a. For simple sequential workflows, use the original tool execution logic.
-       b. For complex workflows with iterations or dependencies, use the WorkflowExecutor.
-    6. Pass the tool execution responses to the LLM to prepare the final answer,
-       and return that response to the user.
+    Yields incremental results after completing each major operation, allowing
+    for real-time updates to the client.
     """
     # get memory state
     memory_state = get_or_create_memory()
-
+    # yield "Thinkering...\n"
+    
     # Step 1: Determine the query state using Agent1
-    agent1_prompt = generate_agent1_prompt(user_query, str(memory_state))
+    yield "Analyzing your query...\n\n"
+    agent1_prompt = memory_management_prompt(user_query, str(memory_state))
     agent1_response = call_llm(agent1_prompt)
     try:
         agent1_data = json.loads(agent1_response)
+        yield "Query analysis complete.\n\n"
     except json.JSONDecodeError as e:
         logger.error(f"Error parsing Agent1 response: {agent1_response}, {e}")
-        return "Error processing the response from Agent1."
+        yield "Error processing the response from Agent1.\n\n"
+        return
     
     # If no tool use is required, simply return the casual response.
     if not agent1_data.get("need_tool_use", False):
-        return agent1_data.get("casual_response", "How can I assist you?")
+        casual_response = agent1_data.get("casual_response", "How can I assist you?")
+        memory_state['conversation_history'] += '\nUser Request:\n' + user_query
+        memory_state['conversation_history'] += '\nAgent Response:\n' + str(casual_response)
+        update_memory(memory_state)
+        yield casual_response
+        return
     
     # Step 2: Generate the prompt for Agent2 to determine necessary tool execution.
-    agent2_prompt = generate_agent2_prompt(user_query)
+    yield "Determining necessary tools...\n\n"
+    agent2_prompt = tool_use_prompt(user_query)
     agent2_response = call_llm(agent2_prompt)
     try:
         agent2_data = json.loads(agent2_response)
+        yield "Tool determination complete.\n\n"
     except json.JSONDecodeError:
         logger.error(f"Error parsing Agent2 response: {agent2_response}")
-        return "Error processing the response from Agent2."
+        yield "Error processing the response from Agent2.\n"
+        return
     
-    memory_state['conversation_history'] += 'User Request:\n' + user_query
-    memory_state['conversation_history'] += 'Agent Respone:\n' + agent1_data
+    memory_state['conversation_history'] += '\nUser Request:\n' + user_query
+    memory_state['conversation_history'] += '\nAgent Response:\n' + str(agent2_data)
 
     # Check if additional parameters are required before tool execution.
     if agent2_data.get("need_additional_parameters_from_user", False):
         update_memory(memory_state)
-        return agent2_data.get("follow_ups", "Additional parameters are needed to proceed.")
+        follow_ups = agent2_data.get("follow_ups", "Additional parameters are needed to proceed.")
+        yield follow_ups
+        return
     
     # Get the tools and workflow description
     tools_to_use = agent2_data.get("tools", [])
-    # workflow_description = agent2_data.get("workflow", "")
     request_context = request_context
     
-    # Step 3: Determine workflow complexity and execute accordingly
-    # is_complex_workflow = determine_workflow_complexity(workflow_description, tools_to_use)
-    # is_complex_workflow = analyze_workflow_complexity(workflow_description, tools_to_use)
+    # Use the original sequential tool execution for simple workflows
+    yield "Executing tools...\n\n"
+    tool_execution_responses = {}
     
-    # if is_complex_workflow['is_complex']:
-    #     # Use the dynamic workflow executor for complex workflows
-    #     executor = WorkflowExecutor(request_context)
-    #     execution_results = executor.execute_workflow(tools_to_use, str(workflow_description) + str(is_complex_workflow['dependencies']) + str(is_complex_workflow["execution_approach"]), user_query)
+    # Execute each tool and yield progress updates
+    for tool in tools_to_use:
+        tool_name = tool.get("tool_name", "unknown tool")
+        yield f"Running {tool_name}...\n\n"
         
-    #     # Handle potential errors in the execution
-    #     if isinstance(execution_results, dict) and "error" in execution_results:
-    #         logger.error(f"Error in workflow execution: {execution_results['error']}")
-    #         return f"There was an error processing your request: {execution_results['error']}"
-        
-    #     # Use the tool responses collected by the executor
-    #     tool_execution_responses = executor.tool_responses
-    # else:
-        # Use the original sequential tool execution for simple workflows
+    
     tool_execution_responses = execute_simple_workflow(tools_to_use, request_context)
+    yield "Tool execution complete.\n\n"
     
     # Step 4: Pass the tool execution responses to the LLM to prepare the final answer.
+    yield "Preparing final response...\n\n\n"
     final_prompt = create_final_prompt(tool_execution_responses, tools_to_use, user_query)
     final_llm_response = call_llm(final_prompt)
-    memory_state['conversation_history'] += 'Agent final Response:\n' + final_llm_response
+    memory_state['conversation_history'] += '\nAgent final Response:\n' + final_llm_response
 
-    update_memory(memory_state)
+    reset_memory()
     # Step 5: Return the final response to the user.
-    return final_llm_response
+    yield final_llm_response

@@ -102,6 +102,14 @@
         "documentation": {}
     },
     {
+        "label": "reset_memory",
+        "importPath": "app.main.tool_operations.utils.memory.memory",
+        "description": "app.main.tool_operations.utils.memory.memory",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.memory.memory",
+        "documentation": {}
+    },
+    {
         "label": "create_final_prompt",
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
@@ -110,7 +118,7 @@
         "documentation": {}
     },
     {
-        "label": "generate_agent1_prompt",
+        "label": "memory_management_prompt",
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
         "isExtraImport": true,
@@ -118,7 +126,7 @@
         "documentation": {}
     },
     {
-        "label": "generate_agent2_prompt",
+        "label": "tool_use_prompt",
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
         "isExtraImport": true,
@@ -131,14 +139,6 @@
         "description": "app.main.tool_operations.utils.prompt_helper",
         "isExtraImport": true,
         "detail": "app.main.tool_operations.utils.prompt_helper",
-        "documentation": {}
-    },
-    {
-        "label": "WorkflowExecutor",
-        "importPath": "app.main.tool_operations.service.workflow_executor",
-        "description": "app.main.tool_operations.service.workflow_executor",
-        "isExtraImport": true,
-        "detail": "app.main.tool_operations.service.workflow_executor",
         "documentation": {}
     },
     {
@@ -175,72 +175,6 @@
         "importPath": "app.main.config",
         "description": "app.main.config",
         "detail": "app.main.config",
-        "documentation": {}
-    },
-    {
-        "label": "ast",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "ast",
-        "description": "ast",
-        "detail": "ast",
-        "documentation": {}
-    },
-    {
-        "label": "asyncio",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "asyncio",
-        "description": "asyncio",
-        "detail": "asyncio",
-        "documentation": {}
-    },
-    {
-        "label": "parse",
-        "importPath": "dateutil.parser",
-        "description": "dateutil.parser",
-        "isExtraImport": true,
-        "detail": "dateutil.parser",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
         "documentation": {}
     },
     {
@@ -389,6 +323,23 @@
         "documentation": {}
     },
     {
+        "label": "Response",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
         "label": "urllib",
         "kind": 6,
         "isExtraImport": true,
@@ -419,6 +370,32 @@
         "description": "app.main.tool_operations.auth",
         "isExtraImport": true,
         "detail": "app.main.tool_operations.auth",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "deque",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "threading",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "threading",
+        "description": "threading",
+        "detail": "threading",
         "documentation": {}
     },
     {
@@ -507,7 +484,7 @@
         "kind": 2,
         "importPath": "app.main.bot.chat",
         "description": "app.main.bot.chat",
-        "peekOfCode": "def chat_handler(request_context, user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:\n       a. For simple sequential workflows, use the original tool execution logic.",
+        "peekOfCode": "def chat_handler(request_context, user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows and streaming responses.\n    Yields incremental results after completing each major operation, allowing\n    for real-time updates to the client.\n    \"\"\"\n    # get memory state\n    memory_state = get_or_create_memory()\n    # yield \"Thinkering...\\n\"\n    # Step 1: Determine the query state using Agent1",
         "detail": "app.main.bot.chat",
         "documentation": {}
     },
@@ -516,7 +493,7 @@
         "kind": 5,
         "importPath": "app.main.bot.chat",
         "description": "app.main.bot.chat",
-        "peekOfCode": "logger = logging.getLogger(__name__)\ndef chat_handler(request_context, user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows.\n    Flow:\n    1. Get the user query and use Agent1 to classify intent.\n    2. If the query does not require a tool, return a casual response.\n    3. If a tool is needed, use Agent2 to determine the tools and workflow.\n    4. If additional parameters are required, return a follow-up prompt.\n    5. Analyze the workflow complexity:",
+        "peekOfCode": "logger = logging.getLogger(__name__)\ndef chat_handler(request_context, user_query, conversation_history=\"\"):\n    \"\"\"\n    Enhanced chat handler with support for complex workflows and streaming responses.\n    Yields incremental results after completing each major operation, allowing\n    for real-time updates to the client.\n    \"\"\"\n    # get memory state\n    memory_state = get_or_create_memory()\n    # yield \"Thinkering...\\n\"",
         "detail": "app.main.bot.chat",
         "documentation": {}
     },
@@ -566,42 +543,6 @@
         "documentation": {}
     },
     {
-        "label": "tools",
-        "kind": 5,
-        "importPath": "app.main.tool_operations.service.orch_tool",
-        "description": "app.main.tool_operations.service.orch_tool",
-        "peekOfCode": "tools = None\nwith open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:\n    tools = json.load(file)",
-        "detail": "app.main.tool_operations.service.orch_tool",
-        "documentation": {}
-    },
-    {
-        "label": "WorkflowExecutor",
-        "kind": 6,
-        "importPath": "app.main.tool_operations.service.workflow_executor",
-        "description": "app.main.tool_operations.service.workflow_executor",
-        "peekOfCode": "class WorkflowExecutor:\n    \"\"\"\n    A class to dynamically execute complex workflows involving multiple API calls,\n    handling dependencies between tools and processing large datasets efficiently.\n    \"\"\"\n    def __init__(self, request_context):\n        \"\"\"Initialize the workflow executor with the request context.\"\"\"\n        self.request_context = request_context\n        self.execution_results = {}\n        self.tool_responses = []",
-        "detail": "app.main.tool_operations.service.workflow_executor",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "kind": 5,
-        "importPath": "app.main.tool_operations.service.workflow_executor",
-        "description": "app.main.tool_operations.service.workflow_executor",
-        "peekOfCode": "logger = logging.getLogger(__name__)\nclass WorkflowExecutor:\n    \"\"\"\n    A class to dynamically execute complex workflows involving multiple API calls,\n    handling dependencies between tools and processing large datasets efficiently.\n    \"\"\"\n    def __init__(self, request_context):\n        \"\"\"Initialize the workflow executor with the request context.\"\"\"\n        self.request_context = request_context\n        self.execution_results = {}",
-        "detail": "app.main.tool_operations.service.workflow_executor",
-        "documentation": {}
-    },
-    {
-        "label": "determine_workflow_complexity",
-        "kind": 2,
-        "importPath": "app.main.tool_operations.service.workflow_helpers",
-        "description": "app.main.tool_operations.service.workflow_helpers",
-        "peekOfCode": "def determine_workflow_complexity(workflow_description, tools_to_use):\n    \"\"\"\n    Analyze the workflow description to determine if it requires complex processing.\n    Args:\n        workflow_description: String describing the workflow\n        tools_to_use: List of tool objects to be used\n    Returns:\n        Boolean indicating if the workflow is complex\n    \"\"\"\n    # Keywords that suggest a complex workflow",
-        "detail": "app.main.tool_operations.service.workflow_helpers",
-        "documentation": {}
-    },
-    {
         "label": "execute_simple_workflow",
         "kind": 2,
         "importPath": "app.main.tool_operations.service.workflow_helpers",
@@ -624,7 +565,16 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.memory.memory",
         "description": "app.main.tool_operations.utils.memory.memory",
-        "peekOfCode": "def update_memory(memory_state):\n    # Update (or create) the app/main/tool_operations/utils/memory/memory.json file with the current memory state\n    with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:\n        json.dump(memory_state, f, indent=4)",
+        "peekOfCode": "def update_memory(memory_state):\n    # Update (or create) the app/main/tool_operations/utils/memory/memory.json file with the current memory state\n    with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:\n        json.dump(memory_state, f, indent=4)\ndef reset_memory():\n    default_state = {\"conversation_history\": \"\"}\n    with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:\n        json.dump(default_state, f, indent=4)\n    return default_state",
+        "detail": "app.main.tool_operations.utils.memory.memory",
+        "documentation": {}
+    },
+    {
+        "label": "reset_memory",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.memory.memory",
+        "description": "app.main.tool_operations.utils.memory.memory",
+        "peekOfCode": "def reset_memory():\n    default_state = {\"conversation_history\": \"\"}\n    with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:\n        json.dump(default_state, f, indent=4)\n    return default_state",
         "detail": "app.main.tool_operations.utils.memory.memory",
         "documentation": {}
     },
@@ -962,20 +912,20 @@
         "documentation": {}
     },
     {
-        "label": "generate_agent1_prompt",
+        "label": "memory_management_prompt",
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_agent1_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = f\"\"\"The current date is {datetime.datetime.now()}.\\n you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, the tools description determines it's capabilities, your task is to classify user prompt and identify his intent then generate your response based on that, your only task is to check if the user wants to perform operation with the quickbooks online return need_tool_use as True, or if it is a follow up to previous conversations with quickbooks online tools agent then return is_follow_up as True, else if it not about these two, then return a casual response.\n        your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n \n        {{\\n \n            \"is_follow_up\":boolean, #true if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else false. \\n\n            \"need_tool_use\": boolean, # true if user query requires using a tool else false. this must be tru is user asked any question that is based on quickbooks online for the subsequesnt agent to  perform the operation. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \\n\n            \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\\n",
+        "peekOfCode": "def memory_management_prompt(user_query, conversation_history):\n    \"\"\"\n    Generate the prompt for Agent1 based on the user query and conversation history.\n    \"\"\"\n    prompt = f\"\"\"The current date is {datetime.datetime.now()}.\\n you are giving this conversation history between user and agent, the agent was given quickbooks online tools to use to perform every kind of opertation in order to process any kind of user request, the tools description determines it's capabilities, your task is to classify user prompt and identify his intent then generate your response based on that, your only task is to check if the user wants to perform operation with the quickbooks online return need_tool_use as True, or if it is a follow up to previous conversations with quickbooks online tools agent then return is_follow_up as True, else if it not about these two, then return a casual response.\n        your response must be in the following formart, no any additional text apart from the json object, do not add any ```json  or ```, return just the json object:\\n \n        {{\\n \n            \"is_follow_up\":boolean, #true if the user query is follow up response of the previous question by the agent requesting additional details to complete the tool, else false. \\n\n            \"need_tool_use\": boolean, # true if user query requires using a tool else false. this must be tru is user asked any question that is based on quickbooks online for the subsequesnt agent to  perform the operation. Note: if user request is a casual conversation, no need to return tools, but a casual_response. \\n\n            \"casual_response\": \"if user request does not require using tool, causally anwer him with friendy tone, else this field should be null\",\\n",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
     {
-        "label": "generate_agent2_prompt",
+        "label": "tool_use_prompt",
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_agent2_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    Uses intelligent defaults and minimizes follow-up questions.\n    \"\"\"\n    with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"You are a helpful assistant that can call the provided tools.\"",
+        "peekOfCode": "def tool_use_prompt(user_query):\n    \"\"\"\n    Generate the prompt for Agent2 based on the user query.\n    Loads the available tools from the qbo_tools.json file.\n    Uses intelligent defaults and minimizes follow-up questions.\n    \"\"\"\n    with open('app/main/tool_operations/utils/tools/qbo_tools.json', 'r') as file:\n        tools = json.load(file)\n    prompt = (\n        \"You are a helpful assistant that can call the provided tools.\"",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -994,24 +944,6 @@
         "importPath": "app.main.tool_operations.utils.prompt_helper",
         "description": "app.main.tool_operations.utils.prompt_helper",
         "peekOfCode": "def create_final_prompt(tool_responses, tools_used, user_request):\n    \"\"\"\n    Create a final prompt for the LLM using the responses obtained from the tool executions.\n    \"\"\"\n    prompt = (\n        \"You are a helpful assistant that can use the quickbooks online apis as tools.\\n.\"\n        \"The tools description determines your capabilities.\\n You output should be properly formatted markdown. with proper headings and subheadings, and your response is only text, not json or any structure output.\"\n        f\"The current date is {datetime.datetime.now()}.\\n You are given the following responses from tool executions made by an agent to process user request,\"\n        \"Based on these, prepare a final, detailed, and professional response to the user:\\n\"\n        \"User request\\n: {user_request}\\n\"",
-        "detail": "app.main.tool_operations.utils.prompt_helper",
-        "documentation": {}
-    },
-    {
-        "label": "analyze_workflow_complexity",
-        "kind": 2,
-        "importPath": "app.main.tool_operations.utils.prompt_helper",
-        "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def analyze_workflow_complexity(tools_to_use, workflow_description):\n    \"\"\"\n    Generate a prompt for the LLM to analyze the complexity of a workflow.\n    Args:\n        tools_to_use: List of tool objects\n        workflow_description: Description of the workflow\n    Returns:\n        Prompt string for the LLM\n    \"\"\"\n    prompt = (",
-        "detail": "app.main.tool_operations.utils.prompt_helper",
-        "documentation": {}
-    },
-    {
-        "label": "generate_code_execution_prompt",
-        "kind": 2,
-        "importPath": "app.main.tool_operations.utils.prompt_helper",
-        "description": "app.main.tool_operations.utils.prompt_helper",
-        "peekOfCode": "def generate_code_execution_prompt(user_query, tools_to_use, workflow_description, template_type=\"standard\"):\n    \"\"\"\n    Generate a prompt for the LLM to create Python code to execute a workflow.\n    Args:\n        user_query: Original user query\n        tools_to_use: List of tool objects\n        workflow_description: Description of the workflow\n        template_type: Type of code template to generate\n    Returns:\n        Prompt string for the LLM",
         "detail": "app.main.tool_operations.utils.prompt_helper",
         "documentation": {}
     },
@@ -1074,7 +1006,7 @@
         "kind": 2,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "def index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')\ndef bot():\n    \"\"\"bot route\"\"\"\n    request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])",
+        "peekOfCode": "def index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')\ndef bot():\n    \"\"\"bot route\"\"\"\n    return render_template(",
         "detail": "manage",
         "documentation": {}
     },
@@ -1083,7 +1015,16 @@
         "kind": 2,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "def bot():\n    \"\"\"bot route\"\"\"\n    request_context = context.RequestContext(session['realm_id'], session['access_token'], session['refresh_token'])\n    # print(get_historical_transactions(req_context=request_context))\n    return render_template(\n        'chat.html',\n    )\n@app.route('/auth')\ndef auth():\n    \"\"\"Initiates the Authorization flow after getting the right config value\"\"\"",
+        "peekOfCode": "def bot():\n    \"\"\"bot route\"\"\"\n    return render_template(\n        'chat.html',\n    )\n@app.route('/bot-stream')\ndef bot_stream():\n    \"\"\"bot stream route\"\"\"\n    return render_template(\n        'chat-stream.html',",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "bot_stream",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def bot_stream():\n    \"\"\"bot stream route\"\"\"\n    return render_template(\n        'chat-stream.html',\n    )\n@app.route('/auth')\ndef auth():\n    \"\"\"Initiates the Authorization flow after getting the right config value\"\"\"\n    params = {\n        'scope': 'com.intuit.quickbooks.accounting', ",
         "detail": "manage",
         "documentation": {}
     },
@@ -1133,6 +1074,24 @@
         "documentation": {}
     },
     {
+        "label": "stream_chat",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def stream_chat():\n    \"\"\"Stream chat responses using Server-Sent Events\"\"\"\n    # Handle the POST request - process the message and queue response chunks\n    if request.method == 'POST':\n        data = request.json\n        user_message = data.get('message', '')\n        client_id = data.get('client_id', str(uuid.uuid4()))\n        # Get session from request context\n        req_context = get_request_context()\n        # Create a new response queue for this request",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "simulate_streaming",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def simulate_streaming(text):\n    \"\"\"Helper function to simulate streaming by breaking text into chunks\"\"\"\n    words = text.split()\n    chunks = []\n    # Create chunks of ~5 words each\n    for i in range(0, len(words),2):\n        chunk = ' '.join(words[i:i+2])\n        if i + 2 < len(words):\n            chunk += ' '  # Add space if not the last chunk\n        chunks.append(chunk)",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
         "label": "get_request_context",
         "kind": 2,
         "importPath": "manage",
@@ -1146,7 +1105,7 @@
         "kind": 5,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "SECRET_KEY = 'dev key'\nDEBUG = True\n# setup flask\napp = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(",
+        "peekOfCode": "SECRET_KEY = 'dev key'\nDEBUG = True\n# setup flask\napp = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\nresponse_queues = {}\nresponse_lock = threading.Lock()\n@app.route('/')\ndef index():",
         "detail": "manage",
         "documentation": {}
     },
@@ -1155,7 +1114,7 @@
         "kind": 5,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "DEBUG = True\n# setup flask\napp = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',",
+        "peekOfCode": "DEBUG = True\n# setup flask\napp = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\nresponse_queues = {}\nresponse_lock = threading.Lock()\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"",
         "detail": "manage",
         "documentation": {}
     },
@@ -1164,7 +1123,7 @@
         "kind": 5,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "app = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )",
+        "peekOfCode": "app = Flask(__name__)\napp.debug = DEBUG\napp.secret_key = SECRET_KEY\nresponse_queues = {}\nresponse_lock = threading.Lock()\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',",
         "detail": "manage",
         "documentation": {}
     },
@@ -1173,7 +1132,7 @@
         "kind": 5,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "app.debug = DEBUG\napp.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')",
+        "peekOfCode": "app.debug = DEBUG\napp.secret_key = SECRET_KEY\nresponse_queues = {}\nresponse_lock = threading.Lock()\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",",
         "detail": "manage",
         "documentation": {}
     },
@@ -1182,7 +1141,25 @@
         "kind": 5,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "app.secret_key = SECRET_KEY\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')\ndef bot():",
+        "peekOfCode": "app.secret_key = SECRET_KEY\nresponse_queues = {}\nresponse_lock = threading.Lock()\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "response_queues",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "response_queues = {}\nresponse_lock = threading.Lock()\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "response_lock",
+        "kind": 5,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "response_lock = threading.Lock()\n@app.route('/')\ndef index():\n    \"\"\"Index route\"\"\"\n    return render_template(\n        'index.html',\n        title=\"QB Customer Leads\",\n    )\n@app.route('/bot')\ndef bot():",
         "detail": "manage",
         "documentation": {}
     }

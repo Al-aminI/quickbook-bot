@@ -25,3 +25,11 @@ def update_memory(memory_state):
     # Update (or create) the app/main/tool_operations/utils/memory/memory.json file with the current memory state
     with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:
         json.dump(memory_state, f, indent=4)
+
+def reset_memory():
+    default_state = {"conversation_history": ""}
+   
+    with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:
+        json.dump(default_state, f, indent=4)
+   
+    return default_state
