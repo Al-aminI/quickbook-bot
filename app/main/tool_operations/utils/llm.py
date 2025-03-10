@@ -9,7 +9,7 @@ from app.main import config
 
 
 
-def get_llm(provider="openai"):
+def get_llm(provider="gemini"):
     """
     Initialize and return an LLM based on the provider
     

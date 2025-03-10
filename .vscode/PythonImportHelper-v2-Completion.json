@@ -70,30 +70,6 @@
         "documentation": {}
     },
     {
-        "label": "api_call",
-        "importPath": "app.main.tool_operations.utils",
-        "description": "app.main.tool_operations.utils",
-        "isExtraImport": true,
-        "detail": "app.main.tool_operations.utils",
-        "documentation": {}
-    },
-    {
-        "label": "api_call",
-        "importPath": "app.main.tool_operations.utils",
-        "description": "app.main.tool_operations.utils",
-        "isExtraImport": true,
-        "detail": "app.main.tool_operations.utils",
-        "documentation": {}
-    },
-    {
-        "label": "context",
-        "importPath": "app.main.tool_operations.utils",
-        "description": "app.main.tool_operations.utils",
-        "isExtraImport": true,
-        "detail": "app.main.tool_operations.utils",
-        "documentation": {}
-    },
-    {
         "label": "call_llm",
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
@@ -110,11 +86,19 @@
         "documentation": {}
     },
     {
-        "label": "analyze_workflow_complexity",
-        "importPath": "app.main.tool_operations.utils.prompt_helper",
-        "description": "app.main.tool_operations.utils.prompt_helper",
+        "label": "get_or_create_memory",
+        "importPath": "app.main.tool_operations.utils.memory.memory",
+        "description": "app.main.tool_operations.utils.memory.memory",
         "isExtraImport": true,
-        "detail": "app.main.tool_operations.utils.prompt_helper",
+        "detail": "app.main.tool_operations.utils.memory.memory",
+        "documentation": {}
+    },
+    {
+        "label": "update_memory",
+        "importPath": "app.main.tool_operations.utils.memory.memory",
+        "description": "app.main.tool_operations.utils.memory.memory",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.memory.memory",
         "documentation": {}
     },
     {
@@ -257,6 +241,22 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "api_call",
+        "importPath": "app.main.tool_operations.utils",
+        "description": "app.main.tool_operations.utils",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "context",
+        "importPath": "app.main.tool_operations.utils",
+        "description": "app.main.tool_operations.utils",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils",
         "documentation": {}
     },
     {
@@ -611,6 +611,24 @@
         "documentation": {}
     },
     {
+        "label": "get_or_create_memory",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.memory.memory",
+        "description": "app.main.tool_operations.utils.memory.memory",
+        "peekOfCode": "def get_or_create_memory():\n    if not os.path.exists('app/main/tool_operations/utils/memory/memory.json'):\n        # If the file doesn't exist, create it with an empty dictionary\n        with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:\n            json.dump({\"conversation_history\":\"\"}, f)\n        return {}\n    else:\n        # If the file exists, load and return its content\n        with open('app/main/tool_operations/utils/memory/memory.json', 'r') as f:\n            memory_state = json.load(f)",
+        "detail": "app.main.tool_operations.utils.memory.memory",
+        "documentation": {}
+    },
+    {
+        "label": "update_memory",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.memory.memory",
+        "description": "app.main.tool_operations.utils.memory.memory",
+        "peekOfCode": "def update_memory(memory_state):\n    # Update (or create) the app/main/tool_operations/utils/memory/memory.json file with the current memory state\n    with open('app/main/tool_operations/utils/memory/memory.json', 'w') as f:\n        json.dump(memory_state, f, indent=4)",
+        "detail": "app.main.tool_operations.utils.memory.memory",
+        "documentation": {}
+    },
+    {
         "label": "tools",
         "kind": 5,
         "importPath": "app.main.tool_operations.utils.prompt_versioning.agent1.prompt_v1",
@@ -930,7 +948,7 @@
         "kind": 2,
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
-        "peekOfCode": "def get_llm(provider=\"openai\"):\n    \"\"\"\n    Initialize and return an LLM based on the provider\n    Args:\n        provider: LLM provider (\"gemini\", \"openai\", or \"reasoning\")\n    Returns:\n        Initialized LLM\n    \"\"\"\n    if provider == \"gemini\":\n        return ChatGoogleGenerativeAI(model=\"gemini-2.0-flash\", api_key=config.GOOGLE_AI_API_KEY)",
+        "peekOfCode": "def get_llm(provider=\"gemini\"):\n    \"\"\"\n    Initialize and return an LLM based on the provider\n    Args:\n        provider: LLM provider (\"gemini\", \"openai\", or \"reasoning\")\n    Returns:\n        Initialized LLM\n    \"\"\"\n    if provider == \"gemini\":\n        return ChatGoogleGenerativeAI(model=\"gemini-2.0-flash\", api_key=config.GOOGLE_AI_API_KEY)",
         "detail": "app.main.tool_operations.utils.llm",
         "documentation": {}
     },
