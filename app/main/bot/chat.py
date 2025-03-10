@@ -3,7 +3,7 @@ import logging
 
 from app.main.tool_operations.service.workflow_helpers import execute_simple_workflow
 # from app.main.tool_operations.utils import api_call
-from app.main.tool_operations.utils.llm import call_llm
+from app.main.tool_operations.utils.llm import call_llm, streaming_call_llm
 from app.main.tool_operations.utils.memory.memory import get_or_create_memory, update_memory, reset_memory
 from app.main.tool_operations.utils.prompt_helper import create_final_prompt, memory_management_prompt, tool_use_prompt
 # from app.main.tool_operations.service.workflow_executor import WorkflowExecutor
@@ -85,9 +85,13 @@ def chat_handler(request_context, user_query, conversation_history=""):
     # Step 4: Pass the tool execution responses to the LLM to prepare the final answer.
     yield "Preparing final response...\n\n\n"
     final_prompt = create_final_prompt(tool_execution_responses, tools_to_use, user_query)
-    final_llm_response = call_llm(final_prompt)
+    final_llm_response = ""
+    for chunk in streaming_call_llm(final_prompt):
+        yield chunk.content
+        final_llm_response += chunk.content
+
     memory_state['conversation_history'] += '\nAgent final Response:\n' + final_llm_response
 
     reset_memory()
     # Step 5: Return the final response to the user.
-    yield final_llm_response
+    yield ""

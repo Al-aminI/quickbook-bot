@@ -228,7 +228,8 @@
         const eventSource = new EventSource(`/stream-chat?client_id=${clientId}`);
         
         // Prepare variables for accumulating the response
-        let responseText = "";
+        let accumulatedText = "";
+        let finalResponseStarted = false;
         let botMessageElement = null;
         
         // Event handlers for SSE
@@ -257,15 +258,27 @@
           try {
             const data = JSON.parse(e.data);
             if (data.chunk) {
-              responseText += data.chunk;
+                console.log(data.chunk)
+                console.log(data.chunk.startsWith("Preparing final response"))
+              // Check if we've received the signal to stop replacing chunks
+              if (data.chunk.startsWith("Preparing final response")) {
+                finalResponseStarted = true;
+                accumulatedText += data.chunk;
+              } else if (!finalResponseStarted) {
+                // Replace previous chunks if we're still in the streaming phase
+                accumulatedText = data.chunk;
+              } else {
+                // Accumulate chunks once we've started the final response
+                accumulatedText += data.chunk;
+              }
               
               // If this is our first chunk, remove the typing indicator and create the message element
               if (!botMessageElement) {
                 if (typingIndicator) typingIndicator.remove();
-                botMessageElement = addMessage("bot", responseText);
+                botMessageElement = addMessage("bot", accumulatedText);
               } else {
                 // Update existing message with new content
-                botMessageElement.innerHTML = marked.parse(responseText);
+                botMessageElement.innerHTML = marked.parse(accumulatedText);
               }
               
               // Scroll to the bottom

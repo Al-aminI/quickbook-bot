@@ -78,6 +78,14 @@
         "documentation": {}
     },
     {
+        "label": "streaming_call_llm",
+        "importPath": "app.main.tool_operations.utils.llm",
+        "description": "app.main.tool_operations.utils.llm",
+        "isExtraImport": true,
+        "detail": "app.main.tool_operations.utils.llm",
+        "documentation": {}
+    },
+    {
         "label": "call_llm",
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
@@ -908,6 +916,15 @@
         "importPath": "app.main.tool_operations.utils.llm",
         "description": "app.main.tool_operations.utils.llm",
         "peekOfCode": "def call_llm(prompt): \n    llm = get_llm()\n    result = llm.invoke(prompt)\n    # Clean up the code (remove potential markdown code blocks if present)\n    if \"```json\" in result.content:\n        result = result.content.split(\"```json\")[1].split(\"```\")[0].strip()\n    elif \"```markdown\" in result.content:\n        result = result.content.split(\"```json\")[1].split(\"```\")[0].strip()\n    elif \"```\" in result:\n        result = result.content.split(\"```\")[1].split(\"```\")[0].strip()",
+        "detail": "app.main.tool_operations.utils.llm",
+        "documentation": {}
+    },
+    {
+        "label": "streaming_call_llm",
+        "kind": 2,
+        "importPath": "app.main.tool_operations.utils.llm",
+        "description": "app.main.tool_operations.utils.llm",
+        "peekOfCode": "def streaming_call_llm(prompt): \n    llm = get_llm()\n    for chunk in llm.stream(prompt):\n        yield chunk",
         "detail": "app.main.tool_operations.utils.llm",
         "documentation": {}
     },

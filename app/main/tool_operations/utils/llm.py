@@ -26,50 +26,7 @@ def get_llm(provider="gemini"):
     else:  # Reasoning model
         return ChatOpenAI(model="gpt-4o")  # Less expensive than 4.5
     
-    
-    
-# def call_llm(prompt):
-#     """
-#     Placeholder for an LLM call.
-#     In production, this would send the prompt to an LLM service and return its response.
-#     Here we simulate responses based on the prompt content.
-#     """
-#     if "conversation history" in prompt:
-#         # Simulated response from Agent1: classify the user query.
-#         return json.dumps({
-#             "is_follow_up": False,
-#             "need_tool_use": True,
-#             "casual_response": None
-#         })
-#     elif "tools set you have access" in prompt:
-#         # Simulated response from Agent2: determine the tools to use.
-#         return json.dumps({
-#             "tools": [
-#                 {
-#                     "tool_name": "QuickBooks Online API",
-#                     "operation": "Customer-ReadAll",
-#                     "description": "Get all Customer objects using generic 'Query' endpoint.",
-#                     "endpoint": "/query?minorversion={{minorversion}}",  # Simplified endpoint for demonstration
-#                     "method": "POST",
-#                     "payload": {"query": "Select * from Customer"},
-#                     "response": {},
-#                     "authentication": "OAuth 1.0",
-#                     "headers": {
-#                         "User-Agent": "Intuit-qbov3-postman-collection1",
-#                         "Accept": "application/json",
-#                         "Content-Type": "application/text"
-#                     },
-#                     "params": {"minorversion": "14"}
-#                 }
-#             ],
-#             "workflow": "Retrieve all customers and then filter those who did not generate the required reports.",
-#             "follow_ups": "Please specify the exact month for the reports.",
-#             "need_additional_parameters_from_user": False
-#         })
-#     else:
-#         # Final LLM response assembling the tool execution responses
-#         return "Here is the final response based on the tool execution results."
-
+   
 
 
 def call_llm(prompt): 
@@ -89,3 +46,11 @@ def call_llm(prompt):
         result = result.content
     print("data", result)
     return result
+
+
+
+def streaming_call_llm(prompt): 
+    llm = get_llm()
+    
+    for chunk in llm.stream(prompt):
+        yield chunk
