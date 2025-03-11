@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Bot with Markdown</title>
+  <!-- Add Markdown parser library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .chat-container {
+      width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    #chat-log {
+      height: 650px;
+      overflow-y: auto;
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 80%;
+      clear: both;
+    }
+    .user {
+      background-color: #DCF8C6;
+      float: right;
+      text-align: right;
+    }
+    .bot {
+      background-color: #F1F0F0;
+      float: left;
+      text-align: left;
+    }
+    /* Add styles for markdown content */
+    .bot pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .bot code {
+      background-color: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .bot blockquote {
+      border-left: 3px solid #ccc;
+      padding-left: 10px;
+      margin-left: 5px;
+      color: #555;
+    }
+    .bot table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .bot th, .bot td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .bot th {
+      background-color: #f2f2f2;
+    }
+    .input-container {
+      display: flex;
+      padding: 10px;
+    }
+    #user-input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #send-btn {
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #send-btn:hover {
+      background-color: #0056b3;
+    }
+    .typing-indicator {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #F1F0F0;
+      border-radius: 5px;
+      margin-top: 10px;
+      float: left;
+      clear: both;
+    }
+    @keyframes blink {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+    .typing-dots {
+      display: inline-block;
+    }
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      background-color: #666;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 2px;
+      animation: blink 1.4s infinite both;
+    }
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div id="chat-log">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Type your message here...">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Configure marked options
+    marked.setOptions({
+      breaks: true,        // Enable line breaks
+      gfm: true,           // Enable GitHub flavored markdown
+      headerIds: false     // Disable header IDs to prevent potential XSS
+    });
+
+    // Function to add a message to the chat log
+    function addMessage(sender, text) {
+      const chatLog = document.getElementById("chat-log");
+      const messageElem = document.createElement("div");
+      messageElem.classList.add("message", sender);
+      
+      // If it's a bot message, parse the markdown
+      if (sender === "bot") {
+        messageElem.innerHTML = marked.parse(text);
+      } else {
+        // User messages stay as plain text
+        messageElem.textContent = text;
+      }
+      
+      chatLog.appendChild(messageElem);
+      // Automatically scroll to the bottom of the chat log
+      chatLog.scrollTop = chatLog.scrollHeight;
+      
+      return messageElem;
+    }
+    
+    // Function to add a typing indicator
+    function addTypingIndicator() {
+      const chatLog = document.getElementById("chat-log");
+      const indicator = document.createElement("div");
+      indicator.classList.add("typing-indicator");
+      indicator.innerHTML = `
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      `;
+      chatLog.appendChild(indicator);
+      chatLog.scrollTop = chatLog.scrollHeight;
+      return indicator;
+    }
+
+    // Function to send the message to the server using SSE with proper sequencing
+    function sendMessageSSE() {
+      const inputField = document.getElementById("user-input");
+      const message = inputField.value.trim();
+      const sendBtn = document.getElementById("send-btn");
+      
+      if (!message) return; // Do nothing if input is empty
+
+      // Display the user's message in the chat log
+      addMessage("user", message);
+      
+      // Clear the input field
+      inputField.value = "";
+      
+      // Show typing indicator
+      const typingIndicator = addTypingIndicator();
+      
+      // Disable the input and button while receiving response
+      inputField.disabled = true;
+      sendBtn.disabled = true;
+      
+      // First, make a POST request to start processing
+      fetch("/stream-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Get the client ID assigned by the server
+        const clientId = data.client_id;
+        
+        // Now create an EventSource connection with this client ID
+        const eventSource = new EventSource(`/stream-chat?client_id=${clientId}`);
+        
+        // Prepare variables for accumulating the response
+        let accumulatedText = "";
+        let finalResponseStarted = false;
+        let botMessageElement = null;
+        
+        // Event handlers for SSE
+        eventSource.onopen = function() {
+          console.log("SSE connection opened");
+        };
+        
+        eventSource.onerror = function(error) {
+          console.error("SSE error:", error);
+          eventSource.close();
+          if (typingIndicator) typingIndicator.remove();
+          if (!botMessageElement) {
+            addMessage("bot", "Sorry, there was an error with the streaming connection.");
+          }
+          inputField.disabled = false;
+          sendBtn.disabled = false;
+        };
+        
+        // Handle the 'start' event
+        eventSource.addEventListener('start', function(e) {
+          console.log("Response started");
+        });
+        
+        // Handle message chunks
+        eventSource.onmessage = function(e) {
+          try {
+            const data = JSON.parse(e.data);
+            if (data.chunk) {
+                console.log(data.chunk)
+                console.log(data.chunk.startsWith("Preparing final response"))
+              // Check if we've received the signal to stop replacing chunks
+              if (data.chunk.startsWith("Preparing final response")) {
+                finalResponseStarted = true;
+                accumulatedText += data.chunk;
+              } else if (!finalResponseStarted) {
+                // Replace previous chunks if we're still in the streaming phase
+                accumulatedText = data.chunk;
+              } else {
+                // Accumulate chunks once we've started the final response
+                accumulatedText += data.chunk;
+              }
+              
+              // If this is our first chunk, remove the typing indicator and create the message element
+              if (!botMessageElement) {
+                if (typingIndicator) typingIndicator.remove();
+                botMessageElement = addMessage("bot", accumulatedText);
+              } else {
+                // Update existing message with new content
+                botMessageElement.innerHTML = marked.parse(accumulatedText);
+              }
+              
+              // Scroll to the bottom
+              const chatLog = document.getElementById("chat-log");
+              chatLog.scrollTop = chatLog.scrollHeight;
+            }
+          } catch (error) {
+            console.error("Error parsing SSE data:", error, e.data);
+          }
+        };
+        
+        // Handle the 'end' event
+        eventSource.addEventListener('end', function(e) {
+          console.log("Response completed");
+          
+          // Close the connection
+          eventSource.close();
+          
+          // Remove typing indicator if it's still there
+          if (typingIndicator) typingIndicator.remove();
+          
+          // Re-enable input
+          inputField.disabled = false;
+          sendBtn.disabled = false;
+        });
+      })
+      .catch(error => {
+        console.error("Error starting chat:", error);
+        if (typingIndicator) typingIndicator.remove();
+        addMessage("bot", "Sorry, there was an error processing your request.");
+        inputField.disabled = false;
+        sendBtn.disabled = false;
+      });
+    }
+
+    // Add event listeners for button click and Enter key press
+    document.getElementById("send-btn").addEventListener("click", sendMessageSSE);
+    document.getElementById("user-input").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        sendMessageSSE();
+      }
+    });
+
+    // Add a welcome message with markdown example
+    window.onload = function() {
+      const welcomeMessage = `How can I help you today?`;
+      addMessage("bot", welcomeMessage);
+    };
+  </script>
+</body>
+</html>
