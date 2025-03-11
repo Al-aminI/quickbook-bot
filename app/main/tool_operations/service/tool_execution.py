@@ -3,39 +3,6 @@ from app.main.tool_operations.utils import api_call
 from app.main.tool_operations.utils.prompt_helper import check_inter_tool_dependency
 
 
-# def determine_workflow_complexity(workflow_description, tools_to_use):
-#     """
-#     Analyze the workflow description to determine if it requires complex processing.
-    
-#     Args:
-#         workflow_description: String describing the workflow
-#         tools_to_use: List of tool objects to be used
-        
-#     Returns:
-#         Boolean indicating if the workflow is complex
-#     """
-#     # Keywords that suggest a complex workflow
-#     complex_indicators = [
-#         "for each", "foreach", "iterate", "loop", "all customers",
-#         "each customer", "for every", "multiple", "batch", "pagination",
-#         "filter", "compare", "all records", "each record"
-#     ]
-    
-#     # Check if the workflow description contains any complex indicators
-#     for indicator in complex_indicators:
-#         if indicator.lower() in workflow_description.lower():
-#             return True
-    
-#     # Check if the number of tools exceeds a threshold (suggesting complexity)
-#     if len(tools_to_use) > 3:
-#         return True
-    
-#     # Check for repeated tool types (suggesting iteration)
-#     tool_operations = [tool.get("operation") for tool in tools_to_use]
-#     if len(tool_operations) != len(set(tool_operations)):
-#         return True
-    
-#     return False
 
 def execute_simple_workflow(tools_to_use, request_context):
     """
@@ -52,6 +19,8 @@ def execute_simple_workflow(tools_to_use, request_context):
     previous_response = None
     
     for index, tool in enumerate(tools_to_use):
+        tool_name = tool.get("tool_name", "unknown tool")
+        yield f"Running {tool_name}...\n\n"
         # If there is a previous tool response and we haven't checked dependency, do so.
         if previous_response is not None:
             dependency_data = check_inter_tool_dependency(previous_response, tool)
@@ -84,5 +53,6 @@ def execute_simple_workflow(tools_to_use, request_context):
         # Save response and continue chaining for dependency checks.
         previous_response = {"tool": tool["operation"], "response": tool_response_text}
         tool_execution_responses.append(previous_response)
+        
     
-    return tool_execution_responses
+    yield tool_execution_responses

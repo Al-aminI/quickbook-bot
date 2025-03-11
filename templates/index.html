@@ -98,7 +98,7 @@
     {% if session['is_authorized'] == True %}
       <span class="status-badge status-authorized">✓ Authorized</span>
       <button class="test-button reset-button" onclick="location.href='{{ url_for('reset_session') }}'">Test: Reset Session</button>
-      <button class="info-button info-button" onclick="location.href='{{ url_for('bot') }}'">chatbot</button>
+      <button class="info-button info-button" onclick="location.href='{{ url_for('bot_stream') }}'">chatbot</button>
       
      
     {% else %}
