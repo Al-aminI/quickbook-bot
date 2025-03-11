@@ -1,7 +1,7 @@
 import json
 import logging
 
-from app.main.tool_operations.service.workflow_helpers import execute_simple_workflow
+from app.main.tool_operations.service.tool_execution import execute_simple_workflow
 # from app.main.tool_operations.utils import api_call
 from app.main.tool_operations.utils.llm import call_llm, streaming_call_llm
 from app.main.tool_operations.utils.memory.memory import get_or_create_memory, update_memory, reset_memory
@@ -20,8 +20,7 @@ def chat_handler(request_context, user_query, conversation_history=""):
     """
     # get memory state
     memory_state = get_or_create_memory()
-    # yield "Thinkering...\n"
-    
+   
     # Step 1: Determine the query state using Agent1
     yield "Analyzing your query...\n\n"
     agent1_prompt = memory_management_prompt(user_query, str(memory_state))
@@ -36,7 +35,9 @@ def chat_handler(request_context, user_query, conversation_history=""):
     
     # If no tool use is required, simply return the casual response.
     if not agent1_data.get("need_tool_use", False):
-        casual_response = agent1_data.get("casual_response", "How can I assist you?")
+        casual_response = agent1_data.get("no_tool_use_response", "How can I assist you?")
+        if casual_response is None:
+            casual_response = "please come again or asked you question all the way from the beginning"
         memory_state['conversation_history'] += '\nUser Request:\n' + user_query
         memory_state['conversation_history'] += '\nAgent Response:\n' + str(casual_response)
         update_memory(memory_state)
@@ -79,19 +80,26 @@ def chat_handler(request_context, user_query, conversation_history=""):
         yield f"Running {tool_name}...\n\n"
         
     
-    tool_execution_responses = execute_simple_workflow(tools_to_use, request_context)
+    tool_execution_responses = None
+    for tool_res in execute_simple_workflow(tools_to_use, request_context):
+        if isinstance(tool_res, str):
+           yield  tool_res
+        else:
+            tool_execution_responses = tool_res
     yield "Tool execution complete.\n\n"
     
     # Step 4: Pass the tool execution responses to the LLM to prepare the final answer.
     yield "Preparing final response...\n\n\n"
+
     final_prompt = create_final_prompt(tool_execution_responses, tools_to_use, user_query)
     final_llm_response = ""
+
     for chunk in streaming_call_llm(final_prompt):
         yield chunk.content
         final_llm_response += chunk.content
-
+    memory_state['conversation_history'] += '\nTools Execution Response:\n' + str(tool_execution_responses)
     memory_state['conversation_history'] += '\nAgent final Response:\n' + final_llm_response
-
-    reset_memory()
+    update_memory(memory_state)
+    # reset_memory()
     # Step 5: Return the final response to the user.
     yield ""
